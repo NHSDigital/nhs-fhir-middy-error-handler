@@ -13,11 +13,7 @@
     "keywords": [],
     "author": "NHS Digital",
     "license": "MIT",
-    "workspaces": [
-      "packages/splunkProcessor"
-    ],
     "devDependencies": {
-      "aws-lambda": "^1.0.7",
       "eslint": "^8.55.0",
       "eslint-config-prettier": "^9.1.0",
       "eslint-plugin-import-newlines": "^1.3.4",
