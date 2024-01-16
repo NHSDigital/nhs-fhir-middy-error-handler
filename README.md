@@ -1,112 +1,118 @@
-# Repository Template
+<!-- TODO: Set main branch protection status checks once implemented -->
 
-[![CI/CD Pull Request](https://github.com/nhs-england-tools/repository-template/actions/workflows/cicd-1-pull-request.yaml/badge.svg)](https://github.com/nhs-england-tools/repository-template/actions/workflows/cicd-1-pull-request.yaml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=repository-template&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=repository-template)
+# NHS FHIR Middy Error Handler
 
-Start with an overview or a brief description of what the project is about and what it does. For example -
+![Build](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/workflows/release/badge.svg?branch=main)
 
-Welcome to our repository template designed to streamline your project setup! This robust template provides a reliable starting point for your new projects, covering an essential tech stack and encouraging best practices in documenting.
+This repository contains a variant of the Middy Error Handler for use in a FHIR AWS lambda.
+it is used in https://github.com/NHSDigital/prescriptionsforpatients
 
-This repository template aims to foster a user-friendly development environment by ensuring that every included file is concise and adequately self-documented. By adhering to this standard, we can promote increased clarity and maintainability throughout your project's lifecycle. Bundled within this template are resources that pave the way for seamless repository creation. Currently supported technologies are:
+## Functionality
 
-- Terraform
-- Docker
+This repository creates an NPM/GitHub Packages package that is designed to be used as error handling middleware for a FHIR AWS lambda, return FHIR compliant error messages as OperationOutcome resources.
 
-Make use of this repository template to expedite your project setup and enhance your productivity right from the get-go. Enjoy the advantage of having a well-structured, self-documented project that reduces overhead and increases focus on what truly matters - coding!
+### Usage
 
-## Table of Contents
+To integrate this into your project, install the package using the following:
 
-- [Repository Template](#repository-template)
-  - [Table of Contents](#table-of-contents)
-  - [Setup](#setup)
-    - [Prerequisites](#prerequisites)
-    - [Configuration](#configuration)
-  - [Usage](#usage)
-    - [Testing](#testing)
-  - [Design](#design)
-    - [Diagrams](#diagrams)
-    - [Modularity](#modularity)
-  - [Contributing](#contributing)
-  - [Contacts](#contacts)
-  - [Licence](#licence)
-
-## Setup
-
-By including preferably a one-liner or if necessary a set of clear CLI instructions we improve user experience. This should be a frictionless installation process that works on various operating systems (macOS, Linux, Windows WSL) and handles all the dependencies.
-
-Clone the repository
-
-```shell
-git clone https://github.com/nhs-england-tools/repository-template.git
-cd nhs-england-tools/repository-template
+```bash
+# TODO: Update this once package is published
 ```
 
-### Prerequisites
+## Project Structure
 
-The following software packages, or their equivalents, are expected to be installed and configured:
-
-- [docker](https://www.docker.com/) container runtime or a compatible tool, e.g. [podman](https://podman.io/),
-- [asdf](https://asdf-vm.com/) version manager,
-- [GNU make](https://www.gnu.org/software/make/) 3.82 or later,
-- [GNU coreutils](https://www.gnu.org/software/coreutils/) and [GNU binutils](https://www.gnu.org/software/binutils/) may be required to build dependencies like Python, which may need to be compiled during installation. For macOS users, this has been scripted and automated by the `dotfiles` project; please see this [script](https://github.com/nhs-england-tools/dotfiles/blob/main/assets/20-install-base-packages.macos.sh) for details,
-- [Python](https://www.python.org/) required to run Git hooks,
-- [jq](https://jqlang.github.io/jq/) a lightweight and flexible command-line JSON processor.
-
-> [!NOTE]<br>
-> The version of GNU make available by default on macOS is earlier than 3.82. You will need to upgrade it or certain `make` tasks will fail. On macOS, you will need [homebrew](https://brew.sh/) installed, then to install `make`, like so:
->
-> ```shell
-> brew install make
-> ```
->
-> You will then see instructions to fix your `$PATH` variable to make the newly installed version available. If you are using [dotfiles](https://github.com/nhs-england-tools/dotfiles), this is all done for you.
-
-### Configuration
-
-Installation and configuration of the toolchain dependencies
-
-```shell
-make config
-```
-
-## Usage
-
-After a successful installation, provide an informative example of how this project can be used. Additional code snippets, screenshots and demos work well in this space. You may also link to the other documentation resources, e.g. the [User Guide](./docs/user-guide.md) to demonstrate more use cases and to show more features.
-
-### Testing
-
-There are `make` tasks for you to configure to run your tests.  Run `make test` to see how they work.  You should be able to use the same entry points for local development as in your CI pipeline.
-
-## Design
-
-### Diagrams
-
-The [C4 model](https://c4model.com/) is a simple and intuitive way to create software architecture diagrams that are clear, consistent, scalable and most importantly collaborative. This should result in documenting all the system interfaces, external dependencies and integration points.
-
-![Repository Template](./docs/diagrams/Repository_Template_GitHub_Generic.png)
-
-### Modularity
-
-Most of the projects are built with customisability and extendability in mind. At a minimum, this can be achieved by implementing service level configuration options and settings. The intention of this section is to show how this can be used. If the system processes data, you could mention here for example how the input is prepared for testing - anonymised, synthetic or live data.
+- `.devcontainer` Contains a dockerfile and vscode devcontainer definition
+- `.github` Contains github workflows that are used for building and deploying from pull requests and releases
+- `src` Contains the source code for the project
+- `tests` Contains the tests for the project
 
 ## Contributing
 
-Describe or link templates on how to raise an issue, feature request or make a contribution to the codebase. Reference the other documentation files, like
+Contributions to this project are welcome from anyone, providing that they conform to the [guidelines for contribution](./CONTRIBUTING.md) and the [community code of conduct](./CODE_OF_CONDUCT.md).
 
-- Environment setup for contribution, i.e. `CONTRIBUTING.md`
-- Coding standards, branching, linting, practices for development and testing
-- Release process, versioning, changelog
-- Backlog, board, roadmap, ways of working
-- High-level requirements, guiding principles, decision records, etc.
+### Licensing
 
-## Contacts
+This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
 
-Provide a way to contact the owners of this project. It can be a team, an individual or information on the means of getting in touch via active communication channels, e.g. opening a GitHub discussion, raising an issue, etc.
+The contents of this repository are protected by Crown Copyright (C).
 
-## Licence
+## Development
 
-> The [LICENCE.md](./LICENCE.md) file will need to be updated with the correct year and owner
+It is recommended that you use visual studio code and a devcontainer as this will install all necessary components and correct versions of tools and languages.  
+See https://code.visualstudio.com/docs/devcontainers/containers for details on how to set this up on your host machine.  
+There is also a workspace file in .vscode that should be opened once you have started the devcontainer. The workspace file can also be opened outside of a devcontainer if you wish.  
 
-Unless stated otherwise, the codebase is released under the MIT License. This covers both the codebase and any sample code in the documentation.
+All commits must be made using [signed commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
 
-Any HTML or Markdown documentation is [© Crown Copyright](https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/) and available under the terms of the [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+Once the steps at the link above have been completed. Add to your ~/.gnupg/gpg.conf as below:
+
+```
+use-agent
+pinentry-mode loopback
+```
+
+and to your ~/.gnupg/gpg-agent.conf as below:
+
+```
+allow-loopback-pinentry
+```
+
+As described here:
+https://stackoverflow.com/a/59170001
+
+You will need to create the files, if they do not already exist.
+This will ensure that your VSCode bash terminal prompts you for your GPG key password.
+
+You can cache the gpg key passphrase by following instructions at https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
+
+### CI Setup
+
+The GitHub Actions require a secret to exist on the repo called "SONAR_TOKEN".
+This can be obtained from [SonarCloud](https://sonarcloud.io/)
+as described [here](https://docs.sonarsource.com/sonarqube/latest/user-guide/user-account/generating-and-using-tokens/).
+You will need the "Execute Analysis" permission for the project (NHSDigital_nhs-fhir-middy-error-handler) in order for the token to work.
+
+### Pre-commit hooks
+
+Some pre-commit hooks are installed as part of the install above, to run basic lint checks and ensure you can't accidentally commit invalid changes.
+The pre-commit hook uses python package pre-commit and is configured in the file .pre-commit-config.yaml.
+A combination of these checks are also run in CI.
+
+### Make commands
+
+There are `make` commands that are run as part of the CI pipeline and help alias some functionality during development.
+
+#### Install targets
+
+<!-- TODO -->
+- `install`
+
+#### Clean and deep-clean targets
+
+- `clean` clears up any files that have been generated by building or testing locally.
+- `deep-clean` runs clean target and also removes any node_modules installed locally.
+
+#### Linting and testing
+
+- `lint` runs lint for all code
+
+#### Check licenses
+
+- `check-licenses` checks licenses for all packages used
+
+### GitHub folder
+
+This .github folder contains workflows and templates related to github
+
+- `pull_request_template.yml`: Template for pull requests.
+- `dependabot.yml`: Dependabot definition file
+
+Workflows are in the .github/workflows folder
+
+- `build.yml`: Runs check-licenses, lint, test and sonarcloud scan against the repo. Called from pull_request.yml and release.yml
+- `combine-dependabot-prs.yml`: Workflow for combining dependabot pull requests. Runs on demand
+- `dependabot_auto_approve_and_merge.yml`: Workflow to auto merge dependabot updates
+- `pr-link.yaml`: This workflow template links Pull Requests to Jira tickets and runs when a pull request is opened.
+- `pull_request.yml`: Called when pull request is opened or updated. Runs build.yml.
+- `release.yml`: Run when code is merged to main branch or a tag starting v is pushed. Calls build.yml.
+- `publish.yml`: Publishes the package to GitHub Packages. Called on demand.
