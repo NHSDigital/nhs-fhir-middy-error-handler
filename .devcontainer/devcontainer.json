@@ -1,65 +1,83 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-    "name": "Ubuntu",
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-      "dockerfile": "Dockerfile",
-      "context": "..",
-      "args": {}
-    },
-    "mounts": [
-      "source=${env:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg,type=bind"
-    ],
-    // Features to add to the dev container. More info: https://containers.dev/features.
-    "features": {
-      "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-        "version": "latest",
-        "moby": "true",
-        "installDockerBuildx": "true"
+  "name": "Ubuntu",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {}
+  },
+  "mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg,type=bind"
+  ],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": "true",
+      "installDockerBuildx": "true"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.vscode-yaml",
+        "ms-python.python",
+        "ms-python.flake8",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "lfm.vscode-makefile-term",
+        "redhat.vscode-xml",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "mkhl.direnv",
+        "github.vscode-github-actions",
+        "Orta.vscode-jest",
+        "rvest.vs-code-prettier-eslint",
+        "esbenp.prettier-vscode",
+        "DavidAnson.vscode-markdownlint",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
+        "python.analysis.autoSearchPaths": true,
+        "python.analysis.extraPaths": [],
+        "editor.formatOnPaste": false, // required
+        "editor.formatOnType": false, // required
+        "editor.formatOnSave": true, // optional
+        "editor.formatOnSaveMode": "file",
+        "[javascript]": {
+          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+        },
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.flake8"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "[markdown]": {
+          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+        },
+        "[dockerfile]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.associations": {
+          "*.yml": "yaml",
+          "*.yaml": "yaml",
+          "*.md": "markdown"
+        },
+        "cSpell.words": ["fhir", "Formik", "pino", "serialisation"]
       }
-    },
-    "customizations": {
-      "vscode": {
-        "extensions": [
-            "redhat.vscode-yaml",
-            "ms-python.python",
-            "ms-python.flake8",
-            "eamodio.gitlens",
-            "github.vscode-pull-request-github",
-            "lfm.vscode-makefile-term",
-            "redhat.vscode-xml",
-            "streetsidesoftware.code-spell-checker",
-            "timonwong.shellcheck",
-            "mkhl.direnv",
-            "github.vscode-github-actions",
-            "Orta.vscode-jest"
-        ],
-        "settings": {
-          "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
-          "python.analysis.autoSearchPaths": true,
-          "python.analysis.extraPaths": [],
-          "editor.formatOnPaste": false, // required
-          "editor.formatOnType": false, // required
-          "editor.formatOnSave": true, // optional
-          "editor.formatOnSaveMode": "file",
-          "cSpell.words": [
-            "fhir",
-            "Formik",
-            "pino",
-            "serialisation"
-          ]
-        }
-      }
-    },
-    "postCreateCommand": "rm -f ~/.docker/config.json; git config --global --add safe.directory /workspaces/nhs-fhir-middy-error-handler; make install; direnv allow ."
-    // "features": {},
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
-    // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": ""
-    // Configure tool-specific properties.
-    // "customizations": {},
-    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-    // "remoteUser": "root"
-  }
+    }
+  },
+  "postCreateCommand": "rm -f ~/.docker/config.json; git config --global --add safe.directory /workspaces/nhs-fhir-middy-error-handler; make install; direnv allow ."
+}
