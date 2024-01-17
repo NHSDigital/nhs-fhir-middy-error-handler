@@ -22,29 +22,23 @@
     "customizations": {
       "vscode": {
         "extensions": [
-          "AmazonWebServices.aws-toolkit-vscode",
-          "redhat.vscode-yaml",
-          "ms-python.python",
-          "ms-python.flake8",
-          "eamodio.gitlens",
-          "github.vscode-pull-request-github",
-          "lfm.vscode-makefile-term",
-          "GrapeCity.gc-excelviewer",
-          "redhat.vscode-xml",
-          "streetsidesoftware.code-spell-checker",
-          "timonwong.shellcheck",
-          "mkhl.direnv",
-          "github.vscode-github-actions"
+            "redhat.vscode-yaml",
+            "ms-python.python",
+            "ms-python.flake8",
+            "eamodio.gitlens",
+            "github.vscode-pull-request-github",
+            "lfm.vscode-makefile-term",
+            "redhat.vscode-xml",
+            "streetsidesoftware.code-spell-checker",
+            "timonwong.shellcheck",
+            "mkhl.direnv",
+            "github.vscode-github-actions",
+            "Orta.vscode-jest"
         ],
         "settings": {
           "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
           "python.analysis.autoSearchPaths": true,
           "python.analysis.extraPaths": [],
-          "python.testing.unittestEnabled": false,
-          "python.testing.pytestEnabled": true,
-          "python.linting.pylintEnabled": false,
-          "python.linting.flake8Enabled": true,
-          "python.linting.enabled": true, // required to format on save
           "editor.formatOnPaste": false, // required
           "editor.formatOnType": false, // required
           "editor.formatOnSave": true, // optional
