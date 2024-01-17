@@ -15,7 +15,7 @@ authors = [
   "Adam Brown <adam.brown41@nhs.net>",
   "Sean Steberis <sean.steberis2@nhs.net>",
   "Jonathan Welch <jonathan.welch1@nhs.net>",
-  "Natasa Fragkou <natasa.fragkou@nhs.net>"
+  "Natasa Fragkou <natasa.fragkou@nhs.net>",
 ]
 readme = "README.md"
 license = "MIT"

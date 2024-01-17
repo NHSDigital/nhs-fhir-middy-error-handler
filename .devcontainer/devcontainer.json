@@ -38,7 +38,8 @@
         "rvest.vs-code-prettier-eslint",
         "esbenp.prettier-vscode",
         "DavidAnson.vscode-markdownlint",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "tamasfe.even-better-toml"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
@@ -69,13 +70,22 @@
         "[dockerfile]": {
           "editor.defaultFormatter": "ms-azuretools.vscode-docker"
         },
+        "[toml]": {
+          "editor.defaultFormatter": "tamasfe.even-better-toml"
+        },
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "files.associations": {
           "*.yml": "yaml",
           "*.yaml": "yaml",
           "*.md": "markdown"
         },
-        "cSpell.words": ["fhir", "Formik", "pino", "serialisation"]
+        "cSpell.words": [
+          "fhir",
+          "Formik",
+          "pino",
+          "serialisation",
+          "devcontainer"
+        ]
       }
     }
   },
