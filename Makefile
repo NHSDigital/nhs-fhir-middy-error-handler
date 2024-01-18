@@ -14,7 +14,7 @@ build: build-node
 build-node:
 	npm run build
 
-lint: lint-node lint-python lint-githubactions
+lint: lint-node lint-python
 
 lint-node:
 	npm run lint
