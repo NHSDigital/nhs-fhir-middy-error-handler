@@ -1,6 +1,37 @@
-const middleware = ({logger = console, level = "error"} = {}) => ({
+import { MiddlewareObj } from "@middy/core"
+import {Logger} from "@aws-lambda-powertools/logger"
+
+type ResponseBody = {
+  resourceType: string
+  id?: string
+  meta?: {
+    lastUpdated: Date
+  }
+  issue: {
+    severity: string
+    code: string
+    details: {
+      coding: {
+        system: string
+        code: string
+        display: string
+      }[]
+    }
+  }[]
+}
+
+type MockLogger = {
+  error: (error: Error, message: string) => void
+}
+type HandlerLogger = Logger | Console | MockLogger
+type LoggerAndLevel = {
+  logger?: HandlerLogger
+  level?: string
+}
+function errorHandler ({logger = console, level = "error"}: LoggerAndLevel) {
+  return {
   onError: async (handler) => {
-    const error = handler.error ?? {}
+    const error: Error | any = handler.error
     const requestId = handler.event.requestContext?.requestId ?? null
     const timeEpoch = handler.event.requestContext?.timeEpoch ?? null
 
@@ -9,22 +40,22 @@ const middleware = ({logger = console, level = "error"} = {}) => ({
     if (typeof logger[level] === "function") {
       logger[level](
         {
-          error: (({name, message, stack, details, cause, status, statusCode, expose}) => ({
-            name,
-            message,
-            stack,
-            details,
-            cause,
-            status,
-            statusCode,
-            expose
+          error: ((e) => ({
+            name: e.name,
+            message: e.message,
+            stack: e.stack,
+            details: e.details,
+            cause: e.cause,
+            status: e.status,
+            statusCode: e.statusCode,
+            expose: e.expose
           }))(error)
         },
         `${error.name ?? ""}: ${error.message ?? ""}`
       )
     }
 
-    const responseBody = {
+    const responseBody: ResponseBody = {
       resourceType: "OperationOutcome",
       issue: [
         {
@@ -61,6 +92,7 @@ const middleware = ({logger = console, level = "error"} = {}) => ({
       }
     }
   }
-})
+} as MiddlewareObj<any, any, Error, any>
+}
 
-export default middleware
+export default errorHandler

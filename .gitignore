@@ -1,3 +1,4 @@
-node_modules/
-.venv/
-coverage/
+node_modules
+.venv
+coverage
+lib

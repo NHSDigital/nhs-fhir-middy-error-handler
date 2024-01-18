@@ -45,9 +45,9 @@
         "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
         "python.analysis.autoSearchPaths": true,
         "python.analysis.extraPaths": [],
-        "editor.formatOnPaste": false, // required
-        "editor.formatOnType": false, // required
-        "editor.formatOnSave": true, // optional
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false,
+        "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file",
         "[javascript]": {
           "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"

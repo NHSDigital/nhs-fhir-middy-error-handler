@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
-    "build": "tsc --build --clean ./tsconfig.json",
+    "build": "tsc",
     "lint": "eslint . --fix",
-    "test": "POWERTOOLS_DEV=true NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "test": "jest --coverage",
     "check-licenses": "license-checker --failOn GPL --failOn LGPL"
   },
   "repository": {
@@ -17,6 +17,7 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.23.3",
     "@types/jest": "^29.5.11",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
@@ -30,13 +31,14 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@aws-lambda-powertools/logger": "^1.17.0",
     "@middy/core": "^5.2.3",
     "archiver": "^6.0.1",
+    "aws-lambda": "^1.0.7",
     "esbuild": "^0.19.8"
   },
   "bugs": {
     "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
   },
-  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme",
-  "main": "index.js"
+  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme"
 }
