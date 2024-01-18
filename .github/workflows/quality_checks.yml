@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  quality_checks:
+  check_code:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -40,8 +40,8 @@ jobs:
         with:
           asdf_branch: v0.11.3
         env:
-          PYTHON_CONFIGURE_OPTS: --enable-shared 
-  
+          PYTHON_CONFIGURE_OPTS: --enable-shared
+
       - name: make install
         run: |
           make install
@@ -58,6 +58,9 @@ jobs:
       - name: run build
         run: make build
 
+  sonarcloud_scan:
+    runs-on: ubuntu-latest
+    steps:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

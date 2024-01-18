@@ -84,7 +84,8 @@
           "Formik",
           "pino",
           "serialisation",
-          "devcontainer"
+          "devcontainer",
+          "sonarcloud"
         ]
       }
     }
