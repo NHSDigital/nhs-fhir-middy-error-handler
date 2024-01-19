@@ -6,6 +6,7 @@ runs:
   steps:
     - name: run build
       run: make build
+      shell: bash
 
     - name: Cache lib
       uses: actions/cache@v2

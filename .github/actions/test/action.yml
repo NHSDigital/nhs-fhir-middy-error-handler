@@ -6,6 +6,7 @@ runs:
   steps:
     - name: run unit tests
       run: make test
+      shell: bash
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
