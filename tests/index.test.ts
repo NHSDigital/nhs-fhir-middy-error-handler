@@ -56,7 +56,8 @@ const mockEvent = {
 }
 
 test("Middleware logs all error details", async () => {
-  const mockErrorLogger = jest.fn(() => { })
+  type ErrorLogger = (error: any, message: string) => void
+  const mockErrorLogger: jest.MockedFunction<ErrorLogger> = jest.fn()
   const mockLogger = {
     error: mockErrorLogger
   }
@@ -69,15 +70,13 @@ test("Middleware logs all error details", async () => {
 
   await handler({}, {})
 
-  expect(mockLogger.error).toHaveBeenCalledTimes(1)
+  expect(mockErrorLogger).toHaveBeenCalledTimes(1)
 
-  expect(mockLogger.error).toHaveBeenCalledWith()
-
-  // const [errorObject, errorMessage] = mockLogger.error.mock.calls[mockLogger.error.mock.calls.length - 1]
-  // expect(errorMessage).toBe("Error: error running lambda")
-  // expect(errorObject.error.name).toBe("Error")
-  // expect(errorObject.error.message).toBe("error running lambda")
-  // expect(errorObject.error.stack).not.toBeNull()
+  const [errorObject, errorMessage] = mockErrorLogger.mock.calls[mockErrorLogger.mock.calls.length - 1]
+  expect(errorMessage).toBe("Error: error running lambda")
+  expect(errorObject.error.name).toBe("Error")
+  expect(errorObject.error.message).toBe("error running lambda")
+  expect(errorObject.error.stack).not.toBeNull()
 })
 
 test("Middleware returns details as valid fhir from lambda event", async () => {

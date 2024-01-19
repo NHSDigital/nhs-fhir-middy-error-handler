@@ -51,7 +51,7 @@ function errorHandler ({logger = console, level = "error"}: LoggerAndLevel) {
             expose: e.expose
           }))(error)
         },
-        `${error.name ?? ""}: ${error.message ?? ""}`
+        `${error.name}: ${error.message}`
       )
     }
 
