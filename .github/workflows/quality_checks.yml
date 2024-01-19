@@ -58,9 +58,6 @@ jobs:
       - name: run build
         run: make build
 
-  sonarcloud_scan:
-    runs-on: ubuntu-latest
-    steps:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
