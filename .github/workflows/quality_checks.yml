@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  quality_check:
+  prepare_workspace:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -45,6 +45,21 @@ jobs:
       - name: make install
         run: |
           make install
+
+      - name: Save workspace
+        uses: actions/upload-artifact@v2
+        with:
+          name: workspace
+          path: .
+
+  quality_check:
+    needs: prepare_workspace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download workspace from artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: workspace
 
       - name: run check-licenses
         run: make check-licenses
