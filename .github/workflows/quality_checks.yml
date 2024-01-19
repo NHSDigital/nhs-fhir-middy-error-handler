@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  checkout_code:
+  quality_check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,10 +20,6 @@ jobs:
           ref: ${{ inputs.BRANCH_NAME }}
           fetch-depth: 0
 
-  install_dependencies:
-    needs: checkout_code
-    runs-on: ubuntu-latest
-    steps:
       # using git commit sha for version of action to ensure we have stable version
       - name: Install asdf
         uses: asdf-vm/actions/setup@05e0d2ed97b598bfce82fd30daf324ae0c4570e6
@@ -50,38 +46,18 @@ jobs:
         run: |
           make install
 
-  check_licenses:
-    needs: install_dependencies
-    runs-on: ubuntu-latest
-    steps:
       - name: run check-licenses
         run: make check-licenses
 
-  lint:
-    needs: install_dependencies
-    runs-on: ubuntu-latest
-    steps:
       - name: run lint
         run: make lint
 
-  build:
-    needs: install_dependencies
-    runs-on: ubuntu-latest
-    steps:
       - name: run build
         run: make build
 
-  unit_tests:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: run unit tests
         run: make test
 
-  sonar_scan:
-    needs: unit_tests
-    runs-on: ubuntu-latest
-    steps:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
