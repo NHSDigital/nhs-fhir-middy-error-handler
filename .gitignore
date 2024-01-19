@@ -2,3 +2,4 @@ node_modules
 .venv
 coverage
 lib
+tsconfig.tsbuildinfo

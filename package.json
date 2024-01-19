@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix",
-    "test": "jest --coverage",
+    "test": "POWERTOOLS_DEV=true NODE_OPTIONS=--experimental-vm-modules jest --no-cache --coverage",
     "check-licenses": "license-checker --failOn GPL --failOn LGPL"
   },
   "repository": {
@@ -18,6 +18,7 @@
   "type": "module",
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.11",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
