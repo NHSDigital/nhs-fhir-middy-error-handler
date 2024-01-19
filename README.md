@@ -5,7 +5,7 @@
 ![Build](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/workflows/release/badge.svg?branch=main)
 
 This repository contains a variant of the Middy Error Handler for use in a FHIR AWS lambda.
-it is used in https://github.com/NHSDigital/prescriptionsforpatients
+it is used in <https://github.com/NHSDigital/prescriptionsforpatients>
 
 ## Functionality
 
@@ -39,8 +39,8 @@ The contents of this repository are protected by Crown Copyright (C).
 ## Development
 
 It is recommended that you use visual studio code and a devcontainer as this will install all necessary components and correct versions of tools and languages.  
-See https://code.visualstudio.com/docs/devcontainers/containers for details on how to set this up on your host machine.  
-There is also a workspace file in .vscode that should be opened once you have started the devcontainer. The workspace file can also be opened outside of a devcontainer if you wish.  
+See <https://code.visualstudio.com/docs/devcontainers/containers> for details on how to set this up on your host machine.  
+There is also a workspace file in .vscode that should be opened once you have started the devcontainer. The workspace file can also be opened outside of a devcontainer if you wish.
 
 All commits must be made using [signed commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
 
@@ -58,12 +58,12 @@ allow-loopback-pinentry
 ```
 
 As described here:
-https://stackoverflow.com/a/59170001
+<https://stackoverflow.com/a/59170001>
 
 You will need to create the files, if they do not already exist.
 This will ensure that your VSCode bash terminal prompts you for your GPG key password.
 
-You can cache the gpg key passphrase by following instructions at https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session
+You can cache the gpg key passphrase by following instructions at <https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session>
 
 ### CI Setup
 
@@ -85,6 +85,7 @@ There are `make` commands that are run as part of the CI pipeline and help alias
 #### Install targets
 
 <!-- TODO -->
+
 - `install`
 
 #### Clean and deep-clean targets

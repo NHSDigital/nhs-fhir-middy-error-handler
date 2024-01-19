@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "lib",
+    "incremental": true,
+    "target": "es2020",
+    "module": "ES2020",
+    "declaration": true,
+    "sourceMap": true,
+    "composite": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

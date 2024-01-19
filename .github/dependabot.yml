@@ -12,12 +12,13 @@ updates:
       interval: "daily"
 
   ###################################
-  # golang workspace  ###############
+  # NPM     #########################
   ###################################
-  - package-ecosystem: gomod
-    directory: /src
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: daily
+      interval: "daily"
+    versioning-strategy: increase
 
   ###################################
   # Poetry  #########################

@@ -1,7 +1,44 @@
-    # install - install dependencies
-    # test - run unit test include producing coverage file for upload to sonarcloud
-    # lint - run lint
-    # build - compile the code
-    # check-licences - check dependencies for GPL code
-    # clean - remove files created during build
-    # deep-clean - run clean and remove all project dependencies
+install: install-python install-hooks install-node
+
+install-node:
+	npm ci
+
+install-python:
+	poetry install
+
+install-hooks:
+	poetry run pre-commit install --install-hooks --overwrite
+
+build: build-node
+
+build-node:
+	npm run build
+
+lint: lint-node lint-python
+
+lint-node:
+	npm run lint
+
+lint-python:
+	poetry run flake8 scripts/*.py --config .flake8
+
+test: test-node
+
+test-node: build-node
+	npm run test
+
+clean:
+	rm -rf coverage
+	rm -rf lib
+
+deep-clean: clean
+	rm -rf .venv
+	find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+
+check-licenses: check-licenses-node check-licenses-python
+
+check-licenses-node:
+	npm run check-licenses
+	
+check-licenses-python:
+	scripts/check_python_licenses.sh
