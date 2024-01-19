@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  quality_check:
+  quality_checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,9 +54,11 @@ jobs:
 
       - name: run build
         run: make build
+        shell: bash
 
       - name: run unit tests
         run: make test
+        shell: bash
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
