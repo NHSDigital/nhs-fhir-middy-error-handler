@@ -14,10 +14,14 @@ jobs:
   quality_checks:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.BRANCH_NAME }}
+          fetch-depth: 0
+
       - name: Setup workspace
         uses: ./.github/actions/setup_workspace
-        with:
-          BRANCH_NAME: ${{ github.event.inputs.BRANCH_NAME }}
 
       - name: run check-licenses
         run: make check-licenses
@@ -25,14 +29,8 @@ jobs:
       - name: run lint
         run: make lint
 
-      - name: run build
-        run: make build
+      - name: Build
+        uses: ./.github/actions/build
 
-      - name: run unit tests
-        run: make test
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Test
+        uses: ./.github/actions/test

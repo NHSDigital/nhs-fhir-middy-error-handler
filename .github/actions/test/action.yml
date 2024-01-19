@@ -1,0 +1,14 @@
+name: "setup_workspace"
+description: "Setup workspace and install dependencies"
+
+runs:
+  using: "composite"
+  steps:
+    - name: run unit tests
+      run: make test
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
