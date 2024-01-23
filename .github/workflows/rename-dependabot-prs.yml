@@ -13,6 +13,9 @@ jobs:
           if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
             echo "PR is from Dependabot."
             echo "PR_TITLE=Chore: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          else
+            echo "PR is not from Dependabot."
+            echo "No change to PR title."
           fi
 
       - name: Update PR title
