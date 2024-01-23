@@ -60,4 +60,4 @@ jobs:
         if: env.PR_UPDATED_TITLE
         id: set_updated_pr_title_output
         run: |
-          echo "::set-output name=updated_pr_title::${{ env.PR_UPDATED_TITLE }}"
+          echo "updated_pr_title=${{ env.PR_UPDATED_TITLE }}" >> $GITHUB_OUTPUT
