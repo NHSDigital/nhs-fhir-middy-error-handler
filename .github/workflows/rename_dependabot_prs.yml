@@ -38,6 +38,7 @@ jobs:
           else
             echo "PR title should not be updated."
             echo "No change to PR title."
+            exit 0
           fi
 
       - name: Update PR title with Prefix
