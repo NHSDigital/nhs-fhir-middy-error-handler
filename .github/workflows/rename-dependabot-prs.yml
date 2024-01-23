@@ -3,7 +3,7 @@ name: Dependabot PR Title Prefix
 on:
   pull_request:
 permissions:
-  contents: write
+  pull-requests: write
 
 jobs:
   update-pr-title:
