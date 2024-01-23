@@ -1,0 +1,32 @@
+name: Dependabot PR Title Prefix
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  update-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from Dependabot
+        run: |
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "PR is from Dependabot."
+            echo "PR_TITLE=Chore: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          else
+            echo "PR is not from Dependabot."
+            echo "No change to PR title."
+          fi
+
+      - name: Update PR title
+        if: env.PR_TITLE
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              title: process.env.PR_TITLE
+            })
