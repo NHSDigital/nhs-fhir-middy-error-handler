@@ -6,7 +6,7 @@ on:
 
 jobs:
   dependabot_prefix_title:
-    uses: ./.github/workflows/rename-dependabot-prs.yml
+    uses: ./.github/workflows/rename_dependabot_prs.yml
 
   quality_checks:
     needs: dependabot_prefix_title
