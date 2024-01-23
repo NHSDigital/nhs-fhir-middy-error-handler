@@ -1,15 +1,26 @@
 name: Quality Checks
 
 on:
+  # Will be null if PR title was not updated
   workflow_call:
+    inputs:
+      PR_TITLE:
+        required: true
+        type: string
 
 jobs:
   pr_title_format_check:
     runs-on: ubuntu-latest
     steps:
+      # If PR title was not updated by the dependabot prefixer, set PR_TITLE variable to PR title
+      - name: Set Up-to-date PR Title
+        if: ${{ !env.PR_TITLE }}
+        run: |
+          echo "PR_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+
       - name: Check PR Title is Prefixed with Change Type
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^(Fix|Update|New|Breaking|Docs|Build|Upgrade|Chore):.*$ ]]; then
+          if [[ "${{ env.PR_TITLE }}" =~ ^(Fix|Update|New|Breaking|Docs|Build|Upgrade|Chore):.*$ ]]; then
             echo "PR title is prefixed with change type."
           else
             echo "PR title is not prefixed with change type."
@@ -21,7 +32,7 @@ jobs:
 
       - name: Check PR Title contains Ticket/Dependabot Reference
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^.*:.*\[(AEA-[0-9]{4}|dependabot)\].*-.*$ ]]; then
+          if [[ "${{ env.PR_TITLE }}" =~ ^.*:.*\[(AEA-[0-9]{4}|dependabot)\].*-.*$ ]]; then
             echo "PR title contains ticket or dependabot reference."
           else
             echo "PR title does not contain ticket or dependabot reference."

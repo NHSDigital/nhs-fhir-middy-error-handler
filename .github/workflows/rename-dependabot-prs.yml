@@ -34,7 +34,7 @@ jobs:
         run: |
           if [[ "${{ env.PR_IS_DEPENDABOT }}" == "true" && "${{ env.PR_IS_PREFIXED }}" == "false" ]]; then
             echo "PR title should be updated."
-            echo "PR_TITLE_SHOULD_BE_UPDATED=true" >> $GITHUB_ENV
+            echo "PR_UPDATED_TITLE=Chore: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
           else
             echo "PR title should not be updated."
             echo "No change to PR title."
@@ -42,17 +42,22 @@ jobs:
           fi
 
       - name: Update PR title with Prefix
-        if: env.PR_TITLE_SHOULD_BE_UPDATED == 'true'
+        if: env.PR_UPDATED_TITLE
         uses: actions/github-script@v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const new_title = `Chore: [dependabot] - ${{ github.event.pull_request.title }}`
-            console.log(`Updating PR title to: ${new_title}`)
+            console.log(`Updating PR title to: ${{ env.PR_UPDATED_TITLE }}`)
 
             github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              title: new_title
+              title: ${{ env.PR_UPDATED_TITLE }}
             })
+
+      - name: Set Updated PR Title as Output
+        if: env.PR_UPDATED_TITLE
+        id: set_updated_pr_title_output
+        run: |
+          echo "::set-output name=updated_pr_title::${{ env.PR_UPDATED_TITLE }}"
