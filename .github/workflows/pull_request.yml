@@ -1,4 +1,4 @@
-name: deploy_pr
+name: Pull Request Checks
 
 on:
   pull_request:
