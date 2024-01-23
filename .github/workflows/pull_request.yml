@@ -5,6 +5,9 @@ on:
     branches: [main]
 
 jobs:
+  dependabot_title_prefix:
+    uses: ./.github/workflows/rename-dependabot-prs.yml
+
   quality_checks:
     uses: ./.github/workflows/quality_checks.yml
     with:
@@ -13,6 +16,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   pr_title_format_check:
+    needs: dependabot_title_prefix
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Title is Prefixed with Change Type
