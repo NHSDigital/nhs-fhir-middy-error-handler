@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  dependabot_title_prefix:
+  dependabot_prefix_title:
     uses: ./.github/workflows/rename-dependabot-prs.yml
 
   quality_checks:
@@ -16,27 +16,5 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   pr_title_format_check:
-    needs: dependabot_title_prefix
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check PR Title is Prefixed with Change Type
-        run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^(Fix|Update|New|Breaking|Docs|Build|Upgrade|Chore):.*$ ]]; then
-            echo "PR title is prefixed with change type."
-          else
-            echo "PR title is not prefixed with change type."
-            echo "Please prefix your PR title with a change type (Fix, Update, New, Breaking, Docs, Build, Upgrade, Chore)."
-            echo "See the ESLint commit convention for more details:"
-            echo "https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint"
-            exit 1
-          fi
-
-      - name: Check PR Title contains Ticket/Dependabot Reference
-        run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^.*:.*\[(AEA-[0-9]{4}|dependabot)\].*-.*$ ]]; then
-            echo "PR title contains ticket or dependabot reference."
-          else
-            echo "PR title does not contain ticket or dependabot reference."
-            echo "Please ensure PR title contains a ticket (eg. 'Fix: [AEA-####] - ...', or 'Chore: [dependabot] - ...')."
-            exit 1
-          fi
+    needs: dependabot_prefix_title
+    uses: ./.github/workflows/pr_title_check.yml

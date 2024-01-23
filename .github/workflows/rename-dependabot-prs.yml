@@ -1,4 +1,4 @@
-name: Dependabot PR Title Prefix
+name: Dependabot Prefix PR Title
 
 on:
   workflow_call:
@@ -6,7 +6,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-pr-title:
+  prefix-pr-title:
     runs-on: ubuntu-latest
     steps:
       - name: Check if PR is from Dependabot
@@ -19,7 +19,7 @@ jobs:
             echo "No change to PR title."
           fi
 
-      - name: Update PR title
+      - name: Update PR title with Prefix
         if: env.PR_TITLE
         uses: actions/github-script@v7.0.1
         with:
