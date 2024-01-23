@@ -14,13 +14,10 @@ build: build-node
 build-node:
 	npm run build
 
-lint: lint-node lint-python
+lint: lint-node
 
 lint-node:
 	npm run lint
-
-lint-python:
-	poetry run flake8 scripts/*.py --config .flake8
 
 test: test-node
 
