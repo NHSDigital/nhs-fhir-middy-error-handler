@@ -47,13 +47,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(`Updating PR title to: ${{ env.PR_UPDATED_TITLE }}`)
+            console.log("Updating PR title to: ${{ env.PR_UPDATED_TITLE }}")
 
             github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              title: ${{ env.PR_UPDATED_TITLE }}
+              title: "${{ env.PR_UPDATED_TITLE }}"
             })
 
       - name: Set Updated PR Title as Output
