@@ -25,6 +25,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            print(`Updating PR title to: ${process.env.PR_TITLE}`);
+            print(github)
             github.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
