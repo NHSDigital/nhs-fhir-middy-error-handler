@@ -29,7 +29,7 @@ jobs:
 
       - name: Check PR Title contains Ticket/Dependabot Reference
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ "^.*:\s\[(AEA-\d{4}|dependabot)\]\s+-\s+.*" ]]; then
+          if [[ "${{ github.event.pull_request.title }}" =~ ^.*:\s\[(AEA-\d{4}|dependabot)\]\s+-\s+.*$ ]]; then
             echo "PR title contains ticket or dependabot reference."
           else
             echo "PR title does not contain ticket or dependabot reference."
