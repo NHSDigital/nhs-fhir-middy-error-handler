@@ -16,6 +16,7 @@ jobs:
       - name: Set Up-to-date PR Title
         if: ${{ !env.PR_TITLE }}
         run: |
+          echo ${{ env.PR_TITLE }}
           echo "PR_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
 
       - name: Check PR Title is Prefixed with Change Type
