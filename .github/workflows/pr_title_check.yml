@@ -12,12 +12,15 @@ jobs:
   pr_title_format_check:
     runs-on: ubuntu-latest
     steps:
-      # If PR title was not updated by the dependabot prefixer, set PR_TITLE variable to PR title
       - name: Set Up-to-date PR Title
-        if: ${{ !env.PR_TITLE }}
         run: |
-          echo ${{ env.PR_TITLE }}
-          echo "PR_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          if [[ "${{ github.event.inputs.PR_TITLE }}"]]; then
+            echo "PR title was updated by dependabot prefixer."
+            echo "PR_TITLE=${{ github.event.inputs.PR_TITLE }}" >> $GITHUB_ENV
+          else
+            echo "PR title was not updated by dependabot prefixer."
+            echo "PR_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          fi
 
       - name: Check PR Title is Prefixed with Change Type
         run: |
