@@ -11,3 +11,32 @@ jobs:
       BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  pr_name_format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Title is Prefixed with Change Type
+        run: |
+          if [[ "${{ github.event.pull_request.title }}" =~ ^(Fix|Update|New|Breaking|Docs|Build|Upgrade|Chore):.*$ ]]; then
+            echo "PR title is prefixed with change type."
+          else
+            echo << EOF
+            PR title is not prefixed with change type.
+            Please prefix your PR title with a change type (Fix, Update, New, Breaking, Docs, Build, Upgrade, Chore).
+            See the ESLint commit convention for more details:
+            https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint
+            EOF
+            exit 1
+          fi
+
+      - name: Check PR Title contains Ticket/Dependabot Reference
+        run: |
+          if [[ "${{ github.event.pull_request.title }}" =~ ^.*: \[(AEA-\d{4}|dependabot)\]\s-\s.* ]]; then
+            echo "PR title contains ticket or dependabot reference."
+          else
+            echo << EOF
+            PR title does not contain ticket or dependabot reference.
+            Please ensure PR title contains a ticket (eg. 'Fix: [AEA-####] - ...', or 'Chore: [dependabot] - ...').
+            EOF
+            exit 1
+          fi

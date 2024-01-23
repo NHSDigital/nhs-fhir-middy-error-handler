@@ -1,5 +1,5 @@
 {
-  "name": "nhs-fhir-middy-error-handler",
+  "name": "@nhs/fhir-middy-error-handler",
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
@@ -42,5 +42,18 @@
   "bugs": {
     "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
   },
-  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme"
+  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme",
+  "files": ["lib"],
+  "main": "lib/index.js",
+  "release": {
+    "branches": ["main"],
+    "plugins": [
+      ["@semantic-release/commit-analyzer",
+    {
+      "preset": "eslint"
+    }],
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm"
+    ]
+  }
 }
