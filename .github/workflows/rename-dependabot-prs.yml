@@ -26,8 +26,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             console.log(`Updating PR title to: ${process.env.PR_TITLE}`);
-            console.log(github)
-            github.pulls.update({
+            github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
