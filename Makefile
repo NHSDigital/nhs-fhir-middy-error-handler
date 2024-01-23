@@ -1,3 +1,5 @@
+default: deep-clean install lint check-licenses build test
+
 install: install-python install-hooks install-node
 
 install-node:
