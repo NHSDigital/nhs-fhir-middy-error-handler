@@ -2,7 +2,8 @@ name: Dependabot PR Title Prefix
 
 on:
   pull_request:
-    types: [reopened, opened, edited]
+permissions:
+  contents: write
 
 jobs:
   update-pr-title:
