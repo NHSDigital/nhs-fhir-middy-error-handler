@@ -34,6 +34,7 @@ jobs:
         run: |
           if [[ "${{ env.PR_IS_DEPENDABOT }}" == "true" && "${{ env.PR_IS_PREFIXED }}" == "false" ]]; then
             echo "PR title should be updated."
+            echo "PR_TITLE_SHOULD_BE_UPDATED=true" >> $GITHUB_ENV
           else
             echo "PR title should not be updated."
             echo "No change to PR title."
@@ -41,6 +42,7 @@ jobs:
           fi
 
       - name: Update PR title with Prefix
+        if: env.PR_TITLE_SHOULD_BE_UPDATED == 'true'
         uses: actions/github-script@v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
