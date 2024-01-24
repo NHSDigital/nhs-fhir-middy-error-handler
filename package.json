@@ -18,6 +18,7 @@
   "private": false,
   "type": "module",
   "devDependencies": {
+    "typescript": "^4.4.3",
     "eslint": "^8.56.0",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "eslint-plugin-import-newlines": "^1.3.4",
@@ -28,7 +29,8 @@
     "ts-jest": "^29.1.1",
     "@types/jest": "^29.5.11",
     "semantic-release": "^23.0.0",
-    "conventional-changelog-eslint": "^5.0.0"
+    "conventional-changelog-eslint": "^5.0.0",
+    "ts-node": "^10.4.0"
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^1.17.0",
@@ -141,7 +143,30 @@
           }
         }
       ],
-      "@semantic-release/npm"
+      "@semantic-release/npm",
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "lib/index.js",
+              "label": "index.js"
+            },
+            {
+              "path": "lib/index.d.ts",
+              "label": "index.d.ts"
+            },
+            {
+              "path": "lib/index.js.map",
+              "label": "index.js.map"
+            },
+            {
+              "path": "package.json",
+              "label": "package.json"
+            }
+          ]
+        }
+      ]
     ]
   }
 }
