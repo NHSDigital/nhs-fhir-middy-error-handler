@@ -26,7 +26,7 @@ jobs:
 
       - name: Check if PR title is already prefixed
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ ^Chore:.*[dependabot].*-.*$ ]]; then
+          if [[ "${{ github.event.pull_request.title }}" =~ ^Upgrade:.*[dependabot].*-.*$ ]]; then
             echo "PR title is already prefixed."
             echo "No change to PR title."
             echo "PR_IS_PREFIXED=true" >> $GITHUB_ENV
@@ -39,7 +39,7 @@ jobs:
         run: |
           if [[ "${{ env.PR_IS_DEPENDABOT }}" == "true" && "${{ env.PR_IS_PREFIXED }}" == "false" ]]; then
             echo "PR title should be updated."
-            echo "PR_UPDATED_TITLE=Chore: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+            echo "PR_UPDATED_TITLE=Upgrade: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
           else
             echo "PR title should not be updated."
             echo "No change to PR title."
