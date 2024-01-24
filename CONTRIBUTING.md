@@ -47,19 +47,17 @@ Tag: [AEA-NNNN] - Short description
 
 Tag can be one of:
 
-- `Fix` - for a bug fix.
-- `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems.
-- `New` - implemented a new feature.
-- `Breaking` - for a backwards-incompatible enhancement or feature.
-- `Docs` - changes to documentation only.
-- `Build` - changes to build process only.
-- `Upgrade` - for a dependency upgrade.
-- `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing).
+- `Fix` - for a bug fix. (Patch release)
+- `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems. (Patch release)
+- `New` - implemented a new feature. (Minor release)
+- `Breaking` - for a backwards-incompatible enhancement or feature. (Major release)
+- `Docs` - changes to documentation only. (Patch release)
+- `Build` - changes to build process only. (No release)
+- `Upgrade` - for a dependency upgrade. (Patch release)
+- `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing). (Patch release)
 
 Correct tagging is necessary for our automated versioning and release process.
 
 ### Changelog
 
-Every pull request must include a change to the changelog.
-
-Add changes to the top of the current date. If the date is old, the reviewer should update the changelog to be correct before merging.
+Release changelogs are generated from the titles of pull requests merged into the `main` branch. Please ensure that your pull request title is sufficiently descriptive of the changes made.

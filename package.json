@@ -61,6 +61,9 @@
         {
           "preset": "eslint",
           "releaseRules": [
+            {
+              "reminder": "Please update CONTRUBUTING.md if you change this"
+            },
             { "tag": "Fix", "release": "patch" },
             { "tag": "Update", "release": "patch" },
             { "tag": "New", "release": "minor"},
