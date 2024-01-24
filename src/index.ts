@@ -28,7 +28,7 @@ type LoggerAndLevel = {
   logger?: HandlerLogger
   level?: string
 }
-function errorHandler ({logger = console, level = "error"}: LoggerAndLevel) {
+function errorHandler({logger = console, level = "error"}: LoggerAndLevel) {
   return {
     onError: async (handler) => {
       const error: Error | any = handler.error
