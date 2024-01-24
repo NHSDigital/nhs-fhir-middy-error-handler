@@ -1,5 +1,5 @@
 {
-  "name": "@nhs/fhir-middy-error-handler",
+  "name": "@jackspagnolinhs/semantic-release-testing",
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
@@ -10,17 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NHSDigital/nhs-fhir-middy-error-handler.git"
+    "url": "git+https://github.com/jackspagnolinhs/semantic-release-testing.git"
   },
   "keywords": [],
-  "author": "NHS Digital",
+  "author": "Jack Spagnoli",
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@babel/preset-typescript": "^7.23.3",
+    "@babel/eslint-parser": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.11",
-    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import-newlines": "^1.3.4",
     "eslint-plugin-prettier": "^5.0.1",
@@ -40,18 +42,24 @@
     "esbuild": "^0.19.8"
   },
   "bugs": {
-    "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
+    "url": "https://github.com/jackspagnolinhs/semantic-release-testing/issues"
   },
-  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme",
-  "files": ["lib"],
+  "homepage": "https://github.com/jackspagnolinhs/semantic-release-testing#readme",
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
   "release": {
-    "branches": ["main"],
+    "branches": [
+      "main"
+    ],
     "plugins": [
-      ["@semantic-release/commit-analyzer",
-    {
-      "preset": "eslint"
-    }],
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "eslint"
+        }
+      ],
       "@semantic-release/release-notes-generator",
       "@semantic-release/npm"
     ]

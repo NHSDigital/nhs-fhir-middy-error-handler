@@ -66,7 +66,7 @@ test("Middleware logs all error details", async () => {
     throw new Error("error running lambda")
   })
 
-  handler.use(errorHandler({ logger: mockLogger }))
+  handler.use(errorHandler({logger: mockLogger}))
 
   await handler({}, {})
 
