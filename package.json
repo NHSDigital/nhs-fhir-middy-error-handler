@@ -15,6 +15,7 @@
   "keywords": [],
   "author": "Jack Spagnoli",
   "license": "MIT",
+  "private": false,
   "type": "module",
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
