@@ -58,7 +58,17 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "preset": "eslint"
+          "preset": "eslint",
+          "releaseRules": [
+            { "type": "Fix", "release": "patch" },
+            { "type": "Update", "release": "patch" },
+            { "type": "New", "release": "minor"},
+            { "type": "Breaking", "release": "major" },
+            { "type": "Docs", "release": "patch" },
+            { "type": "Build", "release": false },
+            { "type": "Upgrade", "release": "patch" },
+            { "type": "Chore", "release": "patch" }
+          ]
         }
       ],
       "@semantic-release/release-notes-generator",
