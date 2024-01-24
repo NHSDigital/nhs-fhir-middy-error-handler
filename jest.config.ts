@@ -30,7 +30,7 @@ const jestConfig: JestConfigWithTsJest = {
   extensionsToTreatAsEsm: [".ts"],
   verbose: true,
   transformIgnorePatterns: [`node_modules/(?!${esModules})`],
-  "rootDir": "./"
+  rootDir: "./"
 }
 
 export default jestConfig
