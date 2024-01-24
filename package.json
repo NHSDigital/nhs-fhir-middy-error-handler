@@ -61,14 +61,14 @@
         {
           "preset": "eslint",
           "releaseRules": [
-            { "type": "Fix", "release": "patch" },
-            { "type": "Update", "release": "patch" },
-            { "type": "New", "release": "minor"},
-            { "type": "Breaking", "release": "major" },
-            { "type": "Docs", "release": "patch" },
-            { "type": "Build", "release": false },
-            { "type": "Upgrade", "release": "patch" },
-            { "type": "Chore", "release": "patch" }
+            { "tag": "Fix", "release": "patch" },
+            { "tag": "Update", "release": "patch" },
+            { "tag": "New", "release": "minor"},
+            { "tag": "Breaking", "release": "major" },
+            { "tag": "Docs", "release": "patch" },
+            { "tag": "Build", "release": false },
+            { "tag": "Upgrade", "release": "patch" },
+            { "tag": "Chore", "release": "patch" }
           ]
         }
       ],
