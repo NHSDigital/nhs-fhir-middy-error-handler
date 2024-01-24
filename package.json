@@ -1,5 +1,5 @@
 {
-  "name": "@jackspagnolinhs/semantic-release-testing",
+  "name": "jackspagnolinhs-semantic-release-testing",
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
