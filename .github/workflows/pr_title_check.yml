@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Set Up-to-date PR Title
         run: |
-          if [[ "${{ github.event.inputs.PR_TITLE }}"]]; then
+          if [[ "${{ github.event.inputs.PR_TITLE }}" ]]; then
             echo "PR title was updated by dependabot prefixer."
             echo "PR_TITLE=${{ github.event.inputs.PR_TITLE }}" >> $GITHUB_ENV
           else
