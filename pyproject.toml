@@ -23,12 +23,9 @@ repository = "https://github.com/NHSDigital/nhs-fhir-middy-error-handler"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-semver = "^3.0.2"
-gitpython = "^3.1.41"
-pre-commit = "^3.5.0"
 
 [tool.poetry.dev-dependencies]
-flake8 = "^5.0.4"
-pip-licenses = "^4.3.4"
+pip-licenses = "^4.3.3"
+pre-commit = "^3.5.0"
 
 [tool.poetry.scripts]

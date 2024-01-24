@@ -31,15 +31,33 @@ Multiple branches are permitted for the same ticket.
 
 Commit messages should be formatted as follows:
 
-```
+```text
 AEA-NNN Summary of changes
 
 Longer description of changes if explaining rationale is necessary,
 limited to 80 columns and spanning as many lines as you need.
 ```
 
+Commits from a pull request get squashed into a single commit on merge, using the pull request title as the commit message.
+Please format your pull request title using tags from [ESLint Convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint) as follows:
+
+```text
+Tag: [AEA-NNNN] - Short description
+```
+
+Tag can be one of:
+
+- `Fix` - for a bug fix. (Patch release)
+- `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems. (Patch release)
+- `New` - implemented a new feature. (Minor release)
+- `Breaking` - for a backwards-incompatible enhancement or feature. (Major release)
+- `Docs` - changes to documentation only. (Patch release)
+- `Build` - changes to build process only. (No release)
+- `Upgrade` - for a dependency upgrade. (Patch release)
+- `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing). (Patch release)
+
+Correct tagging is necessary for our automated versioning and release process.
+
 ### Changelog
 
-Every pull request must include a change to the changelog.
-
-Add changes to the top of the current date. If the date is old, the reviewer should update the changelog to be correct before merging.
+Release changelogs are generated from the titles of pull requests merged into the `main` branch. Please ensure that your pull request title is sufficiently descriptive of the changes made.

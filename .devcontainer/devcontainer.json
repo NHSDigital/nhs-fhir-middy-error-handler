@@ -24,12 +24,8 @@
     "vscode": {
       "extensions": [
         "redhat.vscode-yaml",
-        "ms-python.python",
-        "ms-python.flake8",
         "eamodio.gitlens",
-        "github.vscode-pull-request-github",
         "lfm.vscode-makefile-term",
-        "redhat.vscode-xml",
         "streetsidesoftware.code-spell-checker",
         "timonwong.shellcheck",
         "mkhl.direnv",
@@ -37,7 +33,6 @@
         "Orta.vscode-jest",
         "rvest.vs-code-prettier-eslint",
         "esbenp.prettier-vscode",
-        "DavidAnson.vscode-markdownlint",
         "ms-azuretools.vscode-docker",
         "tamasfe.even-better-toml"
       ],
@@ -49,6 +44,7 @@
         "editor.formatOnType": false,
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file",
+        "vs-code-prettier-eslint.prettierLast": false,
         "[javascript]": {
           "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
         },
@@ -58,14 +54,14 @@
         "[json]": {
           "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
         },
-        "[python]": {
-          "editor.defaultFormatter": "ms-python.flake8"
+        "[jsonc]": {
+          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
         },
         "[yaml]": {
-          "editor.defaultFormatter": "redhat.vscode-yaml"
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[markdown]": {
-          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[dockerfile]": {
           "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -73,20 +69,7 @@
         "[toml]": {
           "editor.defaultFormatter": "tamasfe.even-better-toml"
         },
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "files.associations": {
-          "*.yml": "yaml",
-          "*.yaml": "yaml",
-          "*.md": "markdown"
-        },
-        "cSpell.words": [
-          "fhir",
-          "Formik",
-          "pino",
-          "serialisation",
-          "devcontainer",
-          "sonarcloud"
-        ]
+        "cSpell.words": ["fhir", "Formik", "pino", "serialisation", "devcontainer", "sonarcloud"]
       }
     }
   },

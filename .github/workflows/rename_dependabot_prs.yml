@@ -1,0 +1,68 @@
+name: Dependabot Prefix PR Title
+
+on:
+  workflow_call:
+    outputs:
+      updated_pr_title:
+        value: ${{ jobs.prefix-pr-title.outputs.updated_pr_title }}
+permissions:
+  pull-requests: write
+
+jobs:
+  prefix-pr-title:
+    runs-on: ubuntu-latest
+    outputs:
+      updated_pr_title: ${{ steps.set_updated_pr_title_output.outputs.updated_pr_title }}
+    steps:
+      - name: Check if PR is from Dependabot
+        run: |
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "PR is from Dependabot."
+            echo "PR_IS_DEPENDABOT=true" >> $GITHUB_ENV
+          else
+            echo "PR is not from Dependabot."
+            echo "PR_IS_DEPENDABOT=false" >> $GITHUB_ENV
+          fi
+
+      - name: Check if PR title is already prefixed
+        run: |
+          if [[ "${{ github.event.pull_request.title }}" =~ ^Upgrade:.*[dependabot].*-.*$ ]]; then
+            echo "PR title is already prefixed."
+            echo "No change to PR title."
+            echo "PR_IS_PREFIXED=true" >> $GITHUB_ENV
+          else
+            echo "PR title is not prefixed."
+            echo "PR_IS_PREFIXED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Check if title should be updated
+        run: |
+          if [[ "${{ env.PR_IS_DEPENDABOT }}" == "true" && "${{ env.PR_IS_PREFIXED }}" == "false" ]]; then
+            echo "PR title should be updated."
+            echo "PR_UPDATED_TITLE=Upgrade: [dependabot] - ${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          else
+            echo "PR title should not be updated."
+            echo "No change to PR title."
+            exit 0
+          fi
+
+      - name: Update PR title with Prefix
+        if: env.PR_UPDATED_TITLE
+        uses: actions/github-script@v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            console.log("Updating PR title to: ${{ env.PR_UPDATED_TITLE }}")
+
+            github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              title: "${{ env.PR_UPDATED_TITLE }}"
+            })
+
+      - name: Set Updated PR Title as Output
+        if: env.PR_UPDATED_TITLE
+        id: set_updated_pr_title_output
+        run: |
+          echo "updated_pr_title=${{ env.PR_UPDATED_TITLE }}" >> $GITHUB_OUTPUT

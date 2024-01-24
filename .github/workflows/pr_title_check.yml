@@ -1,0 +1,45 @@
+name: PR Title Check
+
+on:
+  # Will be null if PR title was not updated
+  workflow_call:
+    inputs:
+      PR_TITLE:
+        required: true
+        type: string
+
+jobs:
+  pr_title_format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Up-to-date PR Title
+        run: |
+          if [[ "${{ inputs.PR_TITLE }}" ]]; then
+            echo "PR title was updated by dependabot prefixer."
+            echo "PR_TITLE=${{ inputs.PR_TITLE }}" >> $GITHUB_ENV
+          else
+            echo "PR title was not updated by dependabot prefixer."
+            echo "PR_TITLE=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
+          fi
+
+      - name: Check PR Title is Prefixed with Change Type
+        run: |
+          if [[ "${{ env.PR_TITLE }}" =~ ^(Fix|Update|New|Breaking|Docs|Build|Upgrade|Chore):.*$ ]]; then
+            echo "PR title is prefixed with change type."
+          else
+            echo "PR title is not prefixed with change type."
+            echo "Please prefix your PR title with a change type (Fix, Update, New, Breaking, Docs, Build, Upgrade, Chore)."
+            echo "See the ESLint commit convention for more details:"
+            echo "https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint"
+            exit 1
+          fi
+
+      - name: Check PR Title contains Ticket/Dependabot Reference
+        run: |
+          if [[ "${{ env.PR_TITLE }}" =~ ^.*:.*\[(AEA-[0-9]{4}|dependabot)\].*-.*$ ]]; then
+            echo "PR title contains ticket or dependabot reference."
+          else
+            echo "PR title does not contain ticket or dependabot reference."
+            echo "Please ensure PR title contains a ticket (eg. 'Fix: [AEA-####] - ...', or 'Chore: [dependabot] - ...')."
+            exit 1
+          fi
