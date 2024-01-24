@@ -164,7 +164,8 @@
               "path": "package.json",
               "label": "package.json"
             }
-          ]
+          ],
+          "successComment": false
         }
       ]
     ]
