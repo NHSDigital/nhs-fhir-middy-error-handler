@@ -96,9 +96,7 @@
       [
         "@semantic-release/release-notes-generator",
         {
-          "preset": "eslint",
-          "linkCompare": false,
-          "linkReferences": false
+          "preset": "eslint"
         }
       ],
       "@semantic-release/npm",
