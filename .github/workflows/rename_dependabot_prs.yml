@@ -8,6 +8,8 @@ permissions:
 jobs:
   prefix-pr-title:
     runs-on: ubuntu-latest
+    outputs:
+      updated_pr_title: ${{ steps.set_updated_pr_title_output.outputs.updated_pr_title }}
     steps:
       - name: Check if PR is from Dependabot
         run: |
