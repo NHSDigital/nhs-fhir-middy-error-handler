@@ -49,6 +49,7 @@
         "editor.formatOnType": false,
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file",
+        "vs-code-prettier-eslint.prettierLast": false,
         "[javascript]": {
           "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
         },
