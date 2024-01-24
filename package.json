@@ -1,5 +1,5 @@
 {
-  "name": "@nhs/fhir-middy-error-handler",
+  "name": "@jackspagnolinhs/semantic-release-testing",
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NHSDigital/nhs-fhir-middy-error-handler.git"
+    "url": "git+https://github.com/jackspagnolinhs/semantic-release-testing.git"
   },
   "keywords": [],
-  "author": "NHS Digital",
+  "author": "Jack Spagnoli",
   "license": "MIT",
   "type": "module",
   "devDependencies": {
@@ -42,9 +42,9 @@
     "esbuild": "^0.19.8"
   },
   "bugs": {
-    "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
+    "url": "https://github.com/jackspagnolinhs/semantic-release-testing/issues"
   },
-  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme",
+  "homepage": "https://github.com/jackspagnolinhs/semantic-release-testing#readme",
   "files": [
     "lib"
   ],
