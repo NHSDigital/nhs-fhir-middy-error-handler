@@ -1,4 +1,4 @@
-name: Quality Checks
+name: PR Title Check
 
 on:
   # Will be null if PR title was not updated

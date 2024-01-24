@@ -2,6 +2,9 @@ name: Dependabot Prefix PR Title
 
 on:
   workflow_call:
+    outputs:
+      updated_pr_title:
+        value: ${{ jobs.prefix-pr-title.outputs.updated_pr_title }}
 permissions:
   pull-requests: write
 
