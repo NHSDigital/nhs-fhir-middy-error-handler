@@ -97,50 +97,8 @@
         "@semantic-release/release-notes-generator",
         {
           "preset": "eslint",
-          "presetConfig": {
-            "types": [
-              {
-                "tag": "Fix",
-                "section": "Bug Fixes",
-                "hidden": false
-              },
-              {
-                "tag": "Update",
-                "section": "Updates",
-                "hidden": false
-              },
-              {
-                "tag": "New",
-                "section": "Features",
-                "hidden": false
-              },
-              {
-                "tag": "Breaking",
-                "section": "Breaking Changes",
-                "hidden": false
-              },
-              {
-                "tag": "Docs",
-                "section": "Non-code Changes",
-                "hidden": false
-              },
-              {
-                "tag": "Build",
-                "section": "Non-code Changes",
-                "hidden": false
-              },
-              {
-                "tag": "Upgrade",
-                "section": "Dependency Upgrades",
-                "hidden": false
-              },
-              {
-                "tag": "Chore",
-                "section": "Chores",
-                "hidden": false
-              }
-            ]
-          }
+          "linkCompare": false,
+          "linkReferences": false
         }
       ],
       "@semantic-release/npm",
@@ -165,7 +123,9 @@
               "label": "package.json"
             }
           ],
-          "successComment": false
+          "successComment": false,
+          "failComment": false,
+          "failTitle": false
         }
       ]
     ]
