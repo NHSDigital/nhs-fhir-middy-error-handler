@@ -101,33 +101,7 @@
           "linkReferences": false
         }
       ],
-      "@semantic-release/npm",
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "lib/index.js",
-              "label": "index.js"
-            },
-            {
-              "path": "lib/index.d.ts",
-              "label": "index.d.ts"
-            },
-            {
-              "path": "lib/index.js.map",
-              "label": "index.js.map"
-            },
-            {
-              "path": "package.json",
-              "label": "package.json"
-            }
-          ],
-          "successComment": false,
-          "failComment": false,
-          "failTitle": false
-        }
-      ]
+      "@semantic-release/npm"
     ]
   }
 }
