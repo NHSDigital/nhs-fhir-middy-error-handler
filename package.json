@@ -18,6 +18,7 @@
   "private": false,
   "type": "module",
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
@@ -100,26 +101,24 @@
           "preset": "eslint"
         }
       ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": ".github/CHANGELOG.md"
+        }
+      ],
       "@semantic-release/npm",
       [
         "@semantic-release/github",
         {
           "assets": [
             {
-              "path": "lib/index.js",
-              "label": "index.js"
-            },
-            {
-              "path": "lib/index.d.ts",
-              "label": "index.d.ts"
-            },
-            {
-              "path": "lib/index.js.map",
-              "label": "index.js.map"
-            },
-            {
               "path": "package.json",
               "label": "package.json"
+            },
+            {
+              "path": ".github/CHANGELOG.md",
+              "label": "CHANGELOG.md"
             }
           ],
           "successComment": false,
