@@ -56,7 +56,7 @@ Tag can be one of:
 - `Upgrade` - for a dependency upgrade. (Patch release)
 - `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing). (Patch release)
 
-Correct tagging is necessary for our automated versioning and release process.
+Correct tagging is necessary for our automated versioning and release process ([Release](./RELEASE.md)).
 
 ### Changelog
 

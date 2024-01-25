@@ -1,5 +1,5 @@
 {
-  "name": "jackspagnolinhs-semantic-release-testing",
+  "name": "@nhs/fhir-middy-error-handler",
   "version": "1.0.0",
   "description": "A variant of the Middy Error Handler for use in a FHIR AWS lambda.",
   "scripts": {
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jackspagnolinhs/semantic-release-testing.git"
+    "url": "git+https://github.com/NHSDigital/nhs-fhir-middy-error-handler.git"
   },
   "keywords": [],
-  "author": "Jack Spagnoli",
+  "author": "NHSDigital",
   "license": "MIT",
   "private": false,
   "type": "module",
@@ -39,93 +39,11 @@
     "@middy/core": "^5.2.3"
   },
   "bugs": {
-    "url": "https://github.com/jackspagnolinhs/semantic-release-testing/issues"
+    "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
   },
-  "homepage": "https://github.com/jackspagnolinhs/semantic-release-testing#readme",
+  "homepage": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler#readme",
   "files": [
     "lib"
   ],
-  "main": "lib/index.js",
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "eslint",
-          "releaseRules": [
-            {
-              "reminder": "Please update CONTRIBUTING.md if you change this",
-              "release": false
-            },
-            {
-              "tag": "Fix",
-              "release": "patch"
-            },
-            {
-              "tag": "Update",
-              "release": "patch"
-            },
-            {
-              "tag": "New",
-              "release": "minor"
-            },
-            {
-              "tag": "Breaking",
-              "release": "major"
-            },
-            {
-              "tag": "Docs",
-              "release": "patch"
-            },
-            {
-              "tag": "Build",
-              "release": false
-            },
-            {
-              "tag": "Upgrade",
-              "release": "patch"
-            },
-            {
-              "tag": "Chore",
-              "release": "patch"
-            }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/release-notes-generator",
-        {
-          "preset": "eslint"
-        }
-      ],
-      [
-        "@semantic-release/changelog",
-        {
-          "changelogFile": ".github/CHANGELOG.md"
-        }
-      ],
-      "@semantic-release/npm",
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "package.json",
-              "label": "package.json"
-            },
-            {
-              "path": ".github/CHANGELOG.md",
-              "label": "CHANGELOG.md"
-            }
-          ],
-          "successComment": false,
-          "failComment": false,
-          "failTitle": false
-        }
-      ]
-    ]
-  }
+  "main": "lib/index.js"
 }

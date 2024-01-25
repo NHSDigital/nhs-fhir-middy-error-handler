@@ -14,7 +14,7 @@ Docs: [AEA-1234] - Update README.md
 Upgrade: [dependabot] - Bump pip-licenses from 4.3.3 to 4.3.4
 ```
 
-Supported tags and their meanings are defined in the [contributing guidelines](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/blob/main/CONTRIBUTING.md).
+Supported tags and their meanings are defined in the [contributing guidelines](./CONTRIBUTING.md).
 
 ## Running a release
 
