@@ -1,28 +1,52 @@
-<!-- TODO: Set main branch protection status checks once implemented -->
-
 # NHS FHIR Middy Error Handler
 
-![Build](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/workflows/release/badge.svg?branch=main)
+[![Release to NPM](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/actions/workflows/release.yml)
+[![npm version](https://badge.fury.io/js/@nhs%2Ffhir-middy-error-handler.svg)](https://badge.fury.io/js/@nhs%2Ffhir-middy-error-handler)
 
 This repository contains a variant of the Middy Error Handler for use in a FHIR AWS lambda.
-it is used in <https://github.com/NHSDigital/prescriptionsforpatients>
+It is used in <https://github.com/NHSDigital/prescriptionsforpatients>
 
 ## Functionality
 
-This repository creates an NPM/GitHub Packages package that is designed to be used as error handling middleware for a FHIR AWS lambda, return FHIR compliant error messages as OperationOutcome resources.
+This repository creates an NPM package that is designed to be used as error handling middleware for a FHIR AWS lambda, returning FHIR compliant error messages as OperationOutcome resources.
 
 ### Usage
 
 To integrate this into your project, install the package using the following:
 
 ```bash
-# TODO: Update this once package is published
+npm install @nhs/fhir-middy-error-handler
 ```
+
+Then add the following to your middy middleware stack:
+
+```typescript
+import errorHandler from "@nhs/fhir-middy-error-handler";
+import injectLambdaContext from "@aws-lambda-powertools/logger";
+
+export const handler = middy(lambdaHandler)
+  .use(injectLambdaContext(logger))
+  .use(
+    inputOutputLogger({
+      logger: (request) => {
+        if (request.response) {
+          logger.debug(request);
+        } else {
+          logger.info(request);
+        }
+      },
+    })
+  )
+  .use(errorHandler({ logger }));
+```
+
+See a working example in <https://github.com/NHSDigital/prescriptionsforpatients/blob/main/packages/getMyPrescriptions/src/getMyPrescriptions.ts>
 
 ## Project Structure
 
 - `.devcontainer` Contains a dockerfile and vscode devcontainer definition
 - `.github` Contains github workflows that are used for building and deploying from pull requests and releases
+- `scripts` Contains a script to check python licenses
 - `src` Contains the source code for the project
 - `tests` Contains the tests for the project
 
@@ -82,11 +106,13 @@ A combination of these checks are also run in CI.
 
 There are `make` commands that are run as part of the CI pipeline and help alias some functionality during development.
 
+#### Default target
+
+- `make` runs the default target which runs deep-clean, install, lint, check-licenses, build, and test
+
 #### Install targets
 
-<!-- TODO -->
-
-- `install`
+- `install` installs python, pre-commit hooks, and node modules
 
 #### Clean and deep-clean targets
 
@@ -96,10 +122,11 @@ There are `make` commands that are run as part of the CI pipeline and help alias
 #### Linting and testing
 
 - `lint` runs lint for all code
+- `test` runs all tests
 
 #### Check licenses
 
-- `check-licenses` checks licenses for all packages used
+- `check-licenses` checks licenses for all packages used in node and python
 
 ### GitHub folder
 
@@ -110,10 +137,15 @@ This .github folder contains workflows and templates related to github
 
 Workflows are in the .github/workflows folder
 
-- `build.yml`: Runs check-licenses, lint, test and sonarcloud scan against the repo. Called from pull_request.yml and release.yml
-- `combine-dependabot-prs.yml`: Workflow for combining dependabot pull requests. Runs on demand
+- `combine_dependabot_prs.yml`: Workflow for combining dependabot pull requests. Runs on demand
 - `dependabot_auto_approve_and_merge.yml`: Workflow to auto merge dependabot updates
-- `pr-link.yaml`: This workflow template links Pull Requests to Jira tickets and runs when a pull request is opened.
-- `pull_request.yml`: Called when pull request is opened or updated. Runs build.yml.
-- `release.yml`: Run when code is merged to main branch or a tag starting v is pushed. Calls build.yml.
-- `publish.yml`: Publishes the package to GitHub Packages. Called on demand.
+- `pr_link.yml`: Workflow to link Pull Requests to Jira tickets and runs when a pull request is opened.
+- `pr_title_check.yml`: Workflow to check the format of a pull request is compliant with the project standards. See [guidelines for contribution](./CONTRIBUTING.md) for details.
+- `pull_request.yml`: Called when pull request is opened or updated. Runs rename_dependabot_prs.yml, quality_checks.yml, and pr_title_check.yml
+- `quality_checks.yml`: Runs quality checks on code. Runs on demand.
+- `release.yml`: Uses [semantic-release](https://semantic-release.gitbook.io/semantic-release/) to release main branch to [NPM](https://www.npmjs.com/package/@nhs/fhir-middy-error-handler).
+- `rename_dependabot_prs.yml`: Renames dependabot pull requests to comply with project standards.
+
+### Running a Release
+
+Details of running the release can be found in [RELEASE.md](./RELEASE.md).

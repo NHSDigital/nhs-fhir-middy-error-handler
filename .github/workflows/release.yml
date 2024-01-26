@@ -1,29 +1,10 @@
-name: release
+name: Release to NPM
 
 on:
   workflow_dispatch:
-    inputs:
-      release_type:
-        description: "Release type for semantic versioning (major, minor, patch)"
-        required: true
 
 jobs:
-  verify_release_type:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Verify release type
-        id: verify_release_type
-        run: |
-          if [[ "${{ github.event.inputs.release_type }}" =~ ^(major|minor|patch)$ ]]; then
-            echo "Release type is valid. Performing a '${{ github.event.inputs.release_type }}' release."
-          else
-            echo "Invalid release type: '${{ github.event.inputs.release_type }}'."
-            echo "Valid release types are: major, minor, patch."
-            exit 1
-          fi
-
   quality_checks:
-    needs: verify_release_type
     uses: ./.github/workflows/quality_checks.yml
     with:
       BRANCH_NAME: main
@@ -69,4 +50,10 @@ jobs:
       - name: Build
         run: make build
 
-
+      # use semantic-release to determine the next version number
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npx semantic-release

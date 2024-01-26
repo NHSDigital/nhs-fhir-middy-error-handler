@@ -1,4 +1,4 @@
-name: quality checks
+name: Quality Checks
 
 on:
   workflow_call:
@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  quality_checks:
+  lint_build_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -59,6 +59,15 @@ jobs:
       - name: run unit tests
         run: make test
         shell: bash
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.BRANCH_NAME }}
+          fetch-depth: 0
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

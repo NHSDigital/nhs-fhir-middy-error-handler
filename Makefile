@@ -1,3 +1,5 @@
+default: deep-clean install lint check-licenses build test
+
 install: install-python install-hooks install-node
 
 install-node:
@@ -14,13 +16,10 @@ build: build-node
 build-node:
 	npm run build
 
-lint: lint-node lint-python lint-githubactions
+lint: lint-node lint-githubactions
 
 lint-node:
 	npm run lint
-
-lint-python:
-	poetry run flake8 scripts/*.py --config .flake8
 
 lint-githubactions:
 	actionlint
@@ -33,6 +32,7 @@ test-node: build-node
 clean:
 	rm -rf coverage
 	rm -rf lib
+	rm -f tsconfig.tsbuildinfo
 
 deep-clean: clean
 	rm -rf .venv

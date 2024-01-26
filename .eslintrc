@@ -3,15 +3,19 @@
   "env": {
     "node": true,
     "es6": true,
-    "jest": true,
+    "jest": true
   },
-  "ignorePatterns": ["**/lib/*"],
+  "ignorePatterns": ["lib"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
   },
-  "plugins": ["import-newlines"],
-  "extends": ["eslint:recommended"],
+  "plugins": ["@typescript-eslint", "import-newlines"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "block-spacing": "error",
     "brace-style": ["error", "1tbs"],
@@ -20,8 +24,8 @@
       "error",
       {
         "before": false,
-        "after": true,
-      },
+        "after": true
+      }
     ],
     "dot-location": ["error", "property"],
     "eol-last": ["error", "always"],
@@ -31,31 +35,31 @@
       "error",
       "declaration",
       {
-        "allowArrowFunctions": true,
-      },
+        "allowArrowFunctions": true
+      }
     ],
     "import-newlines/enforce": [
       "error",
       {
         "items": 3,
         "max-len": 120,
-        "semi": false,
-      },
+        "semi": false
+      }
     ],
     "indent": [
       "error",
       2,
       {
-        "SwitchCase": 1,
-      },
+        "SwitchCase": 1
+      }
     ],
     "max-len": ["error", 120],
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": [
       "error",
       {
-        "max": 1,
-      },
+        "max": 1
+      }
     ],
     "no-trailing-spaces": "error",
     "object-curly-spacing": ["error", "never"],
@@ -64,9 +68,10 @@
       "double",
       {
         "allowTemplateLiterals": true,
-        "avoidEscape": true,
-      },
+        "avoidEscape": true
+      }
     ],
     "semi": ["error", "never"],
-  },
+    "@typescript-eslint/no-explicit-any": "off"
+  }
 }

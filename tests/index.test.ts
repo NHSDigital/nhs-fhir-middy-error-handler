@@ -66,7 +66,7 @@ test("Middleware logs all error details", async () => {
     throw new Error("error running lambda")
   })
 
-  handler.use(errorHandler({ logger: mockLogger }))
+  handler.use(errorHandler({logger: mockLogger}))
 
   await handler({}, {})
 
@@ -81,7 +81,7 @@ test("Middleware logs all error details", async () => {
 
 test("Middleware returns details as valid fhir from lambda event", async () => {
   const mockLogger = {
-    error: jest.fn(() => { })
+    error: jest.fn(() => {})
   }
 
   const handler = middy(() => {
@@ -118,7 +118,7 @@ test("Middleware returns details as valid fhir from lambda event", async () => {
 
 test("Returns a response with the correct MIME type", async () => {
   const mockLogger = {
-    error: jest.fn(() => { })
+    error: jest.fn(() => {})
   }
   const handler = middy(() => {
     throw new Error("error running lambda")

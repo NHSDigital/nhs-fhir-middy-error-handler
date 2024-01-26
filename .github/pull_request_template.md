@@ -12,19 +12,40 @@
 
 Add any summary information of what is in the change. **Remove this line if you have nothing to add.**
 
-## Reviews Required
+**Remove the sections below this line once you have named your PR**
 
-**Check who should review this. Remove this line once this has been done**
+## Pull Request Naming
 
-- [x] Dev
-- [ ] Test
-- [ ] Tech Author
-- [ ] Product Owner
+Pull requests should be named using the following format:
 
-## Review Checklist
+```text
+Tag: [AEA-NNNN] - Short description
+```
 
-:information_source: This section is to be filled in by the **reviewer**.
+Tag can be one of:
 
-- [ ] I have reviewed the changes in this PR and they fill all or part of the acceptance criteria of the ticket, and the code is in a mergeable state.
-- [ ] If there were infrastructure, operational, or build changes, I have made sure there is sufficient evidence that the changes will work.
-- [ ] I have ensured the jira ticket has been updated with the github pull request link
+- `Fix` - for a bug fix. (Patch release)
+- `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems. (Patch release)
+- `New` - implemented a new feature. (Minor release)
+- `Breaking` - for a backwards-incompatible enhancement or feature. (Major release)
+- `Docs` - changes to documentation only. (Patch release)
+- `Build` - changes to build process only. (No release)
+- `Upgrade` - for a dependency upgrade. (Patch release)
+- `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing). (Patch release)
+
+Correct tagging is necessary for our automated versioning and release process ([Release](./RELEASE.md)).
+
+The description of your pull request will be used as the commit message for the merge, and also be included in the changelog. Please ensure that your title is sufficiently descriptive.
+
+### Rerunning Checks
+
+If you need to rename your pull request, you can restart the checks by either:
+
+- Closing and reopening the pull request
+- Amend your last commit and force push to the branch
+  ```bash
+  git commit --amend --no-edit
+  git push --force
+  ```
+
+Rerunning the checks from within the pull request will not use the updated title.
