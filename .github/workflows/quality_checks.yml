@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  quality_checks:
+  lint_build_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
