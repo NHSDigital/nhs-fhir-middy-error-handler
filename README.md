@@ -1,6 +1,7 @@
 # NHS FHIR Middy Error Handler
 
 [![Release to NPM](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/NHSDigital/nhs-fhir-middy-error-handler/actions/workflows/release.yml)
+[![npm version](https://badge.fury.io/js/@nhs%2Ffhir-middy-error-handler.svg)](https://badge.fury.io/js/@nhs%2Ffhir-middy-error-handler)
 
 This repository contains a variant of the Middy Error Handler for use in a FHIR AWS lambda.
 It is used in <https://github.com/NHSDigital/prescriptionsforpatients>
