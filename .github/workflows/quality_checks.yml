@@ -60,6 +60,9 @@ jobs:
         run: make test
         shell: bash
 
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
