@@ -29,6 +29,7 @@ test-node: build-node
 clean:
 	rm -rf coverage
 	rm -rf lib
+	rm -f tsconfig.tsbuildinfo
 
 deep-clean: clean
 	rm -rf .venv

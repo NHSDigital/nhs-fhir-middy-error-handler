@@ -36,7 +36,7 @@ jobs:
 
       - name: Check PR Title contains Ticket/Dependabot Reference
         run: |
-          if [[ "${{ env.PR_TITLE }}" =~ ^.*:.*\[(AEA-[0-9]{4}|dependabot)\].*-.*$ ]]; then
+          if [[ "${{ env.PR_TITLE }}" =~ ^.*:.*\[(AEA-[0-9]{1,4}|dependabot)\].*-.*$ ]]; then
             echo "PR title contains ticket or dependabot reference."
           else
             echo "PR title does not contain ticket or dependabot reference."
