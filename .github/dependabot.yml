@@ -10,6 +10,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "Upgrade: [dependabot] - "
 
   ###################################
   # NPM     #########################
@@ -18,6 +20,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "Upgrade: [dependabot] - "
     versioning-strategy: increase
 
   ###################################
@@ -27,4 +31,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "Upgrade: [dependabot] - "
     versioning-strategy: increase
