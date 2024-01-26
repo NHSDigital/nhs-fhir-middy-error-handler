@@ -12,6 +12,8 @@
 
 Add any summary information of what is in the change. **Remove this line if you have nothing to add.**
 
+**Remove the sections below this line once you have named your PR**
+
 ## Pull Request Naming
 
 Pull requests should be named using the following format:
