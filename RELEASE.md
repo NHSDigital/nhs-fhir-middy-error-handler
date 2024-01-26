@@ -23,3 +23,7 @@ Once all desired pull requests have been merged to `main`, a release can be run 
 - Run quality checks on the code, including license checks, linting, and unit tests.
 - Run semantic-release to determine the next version number and create a release.
 - Publish the release to GitHub and npm.
+
+## Error During a Release
+
+A GitHub tag for the version to be released is created before NPM attempts to publish the package. In the event of a failed publish to NPM the newly created tag must be deleted manually.
