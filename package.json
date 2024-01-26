@@ -16,6 +16,9 @@
   "author": "NHSDigital",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "devDependencies": {
     "typescript": "^4.4.3",
