@@ -34,3 +34,16 @@ Tag can be one of:
 Correct tagging is necessary for our automated versioning and release process ([Release](./RELEASE.md)).
 
 The description of your pull request will be used as the commit message for the merge, and also be included in the changelog. Please ensure that your title is sufficiently descriptive.
+
+### Rerunning Checks
+
+If you need to rename your pull request, you can restart the checks by either:
+
+- Closing and reopening the pull request
+- Amend your last commit and force push to the branch
+  ```bash
+  git commit --amend --no-edit
+  git push --force
+  ```
+
+Rerunning the checks from within the pull request will not use the updated title.
