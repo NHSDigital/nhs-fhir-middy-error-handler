@@ -5,11 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  dependabot_prefix_title:
-    uses: ./.github/workflows/rename_dependabot_prs.yml
-
   quality_checks:
-    needs: dependabot_prefix_title
     uses: ./.github/workflows/quality_checks.yml
     with:
       BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
@@ -17,8 +13,4 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   pr_title_format_check:
-    needs: dependabot_prefix_title
     uses: ./.github/workflows/pr_title_check.yml
-    with:
-      # Will be null if PR title was not updated
-      PR_TITLE: ${{ needs.dependabot_prefix_title.outputs.updated_pr_title }}

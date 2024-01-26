@@ -1,5 +1,4 @@
 import {MiddlewareObj} from "@middy/core"
-import {Logger} from "@aws-lambda-powertools/logger"
 
 type ResponseBody = {
   resourceType: string
@@ -23,7 +22,7 @@ type ResponseBody = {
 type MockLogger = {
   error: (error: Error, message: string) => void
 }
-type HandlerLogger = Logger | Console | MockLogger
+type HandlerLogger = Console | MockLogger
 type LoggerAndLevel = {
   logger?: HandlerLogger
   level?: string
