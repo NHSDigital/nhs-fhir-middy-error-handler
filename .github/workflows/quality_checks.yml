@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  lint_build_test:
+  quality_checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,20 +54,9 @@ jobs:
 
       - name: run build
         run: make build
-        shell: bash
 
       - name: run unit tests
         run: make test
-        shell: bash
-
-  sonarcloud:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.BRANCH_NAME }}
-          fetch-depth: 0
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
