@@ -16,10 +16,13 @@ build: build-node
 build-node:
 	npm run build
 
-lint: lint-node
+lint: lint-node lint-githubactions
 
 lint-node:
 	npm run lint
+
+lint-githubactions:
+	actionlint
 
 test: test-node
 
