@@ -22,6 +22,8 @@ jobs:
           fi
 
       - name: Check PR Title contains Ticket/Dependabot Reference
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           if [[ "$PR_TITLE" =~ ^.*:.*\[([A-Z]+-[0-9]+|dependabot)\].*-.*$ ]]; then
             echo "PR title contains ticket or dependabot reference."
