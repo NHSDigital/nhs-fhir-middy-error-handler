@@ -1,0 +1,13 @@
+name: CI Quality Checks
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  quality_checks:
+    uses: ./.github/workflows/quality_checks.yml
+    with:
+      BRANCH_NAME: main
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
