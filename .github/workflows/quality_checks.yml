@@ -1,6 +1,8 @@
 name: Quality Checks
 
 on:
+  push:
+    branches: [main]
   workflow_call:
     inputs:
       BRANCH_NAME:
