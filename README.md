@@ -21,12 +21,18 @@ npm install @nhs/fhir-middy-error-handler
 Then add the following to your middy middleware stack:
 
 ```typescript
-import errorHandler from "@nhs/fhir-middy-error-handler";
+import middy from "@middy/core"
 import injectLambdaContext from "@aws-lambda-powertools/logger";
+import errorHandler from "@nhs/fhir-middy-error-handler";
+
+const logger = new Logger({serviceName: "myService", logLevel: "INFO"})
+
+const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  ...
+}
 
 export const handler = middy(lambdaHandler)
   .use(injectLambdaContext(logger))
-  ...
   .use(errorHandler({ logger }));
 ```
 
