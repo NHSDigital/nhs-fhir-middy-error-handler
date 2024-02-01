@@ -5,7 +5,6 @@
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=NHSDigital_nhs-fhir-middy-error-handler)](https://sonarcloud.io/summary/new_code?id=NHSDigital_nhs-fhir-middy-error-handler)
 
 This repository contains a variant of the Middy Error Handler for use in a FHIR AWS lambda.
-It is used in <https://github.com/NHSDigital/prescriptionsforpatients>
 
 ## Functionality
 
@@ -27,17 +26,7 @@ import injectLambdaContext from "@aws-lambda-powertools/logger";
 
 export const handler = middy(lambdaHandler)
   .use(injectLambdaContext(logger))
-  .use(
-    inputOutputLogger({
-      logger: (request) => {
-        if (request.response) {
-          logger.debug(request);
-        } else {
-          logger.info(request);
-        }
-      },
-    })
-  )
+  ...
   .use(errorHandler({ logger }));
 ```
 
