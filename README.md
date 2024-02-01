@@ -22,7 +22,8 @@ Then add the following to your middy middleware stack:
 
 ```typescript
 import middy from "@middy/core"
-import injectLambdaContext from "@aws-lambda-powertools/logger";
+import {Logger, injectLambdaContext} from "@aws-lambda-powertools/logger"
+import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda"
 import errorHandler from "@nhs/fhir-middy-error-handler";
 
 const logger = new Logger({serviceName: "myService", logLevel: "INFO"})
