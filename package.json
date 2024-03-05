@@ -37,7 +37,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^1.18.1",
+    "@aws-lambda-powertools/logger": "^2.0.2",
     "@middy/core": "^5.2.6"
   },
   "bugs": {
