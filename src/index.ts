@@ -31,7 +31,7 @@ type LoggerAndLevel = {
 function errorHandler({logger = console, level = "error"}: LoggerAndLevel) {
   return {
     onError: async (handler) => {
-      const error: Error | any = handler.error
+      const error: any = handler.error
       const requestId = handler.event.requestContext?.requestId ?? null
       const timeEpoch = handler.event.requestContext?.timeEpoch ?? null
 
