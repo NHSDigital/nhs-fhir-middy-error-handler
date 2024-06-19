@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.2.0",
-    "@middy/core": "^5.4.0",
+    "@middy/core": "^5.4.1",
     "conventional-changelog-eslint": "^6.0.0"
   },
   "bugs": {
