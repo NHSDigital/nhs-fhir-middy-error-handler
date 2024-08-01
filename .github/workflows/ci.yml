@@ -60,7 +60,7 @@ jobs:
             cat semantic-release-output.log
             exit 1
           fi
-          tagFormat=$(jq -r .tagFormat .releaserc)
+          tagFormat=$(node -e "const config=require('./release.config.js'); console.log(config.tagFormat)")
           if [ "${tagFormat}" = "null" ]
           then
             tagFormat="v\${version}"
