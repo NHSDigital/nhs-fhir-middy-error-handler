@@ -23,8 +23,7 @@
         "mkhl.direnv",
         "github.vscode-github-actions",
         "Orta.vscode-jest",
-        "rvest.vs-code-prettier-eslint",
-        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
         "ms-azuretools.vscode-docker",
         "tamasfe.even-better-toml"
       ],
@@ -36,31 +35,9 @@
         "editor.formatOnType": false,
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "file",
-        "vs-code-prettier-eslint.prettierLast": false,
-        "[javascript]": {
-          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-        },
-        "[typescript]": {
-          "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-        },
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[yaml]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[markdown]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[dockerfile]": {
-          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-        },
-        "[toml]": {
-          "editor.defaultFormatter": "tamasfe.even-better-toml"
-        },
+        "eslint.useFlatConfig": true,
+        "eslint.format.enable": true,
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         "files.associations": {
           ".releaserc": "json"
         },

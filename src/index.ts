@@ -7,22 +7,23 @@ type ResponseBody = {
   meta?: {
     lastUpdated: Date
   }
-  issue: {
+  issue: Array<{
     severity: string
     code: string
     details: {
-      coding: {
+      coding: Array<{
         system: string
         code: string
         display: string
-      }[]
+      }>
     }
-  }[]
+  }>
 }
 
 type MockLogger = {
   error: (error: Error, message: string) => void
 }
+// eslint-disable-next-line no-undef
 type HandlerLogger = Console | MockLogger | Logger
 type LoggerAndLevel = {
   logger?: HandlerLogger
@@ -31,6 +32,7 @@ type LoggerAndLevel = {
 function errorHandler({logger = console, level = "error"}: LoggerAndLevel) {
   return {
     onError: async (handler) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = handler.error
       const requestId = handler.event.requestContext?.requestId ?? null
       const timeEpoch = handler.event.requestContext?.timeEpoch ?? null
@@ -92,7 +94,8 @@ function errorHandler({logger = console, level = "error"}: LoggerAndLevel) {
         }
       }
     }
-  } as MiddlewareObj<any, any, Error, any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } satisfies MiddlewareObj<any, any, Error, any>
 }
 
 export default errorHandler
