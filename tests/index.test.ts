@@ -56,6 +56,7 @@ const mockEvent = {
 }
 
 test("Middleware logs all error details", async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type ErrorLogger = (error: any, message: string) => void
   const mockErrorLogger: jest.MockedFunction<ErrorLogger> = jest.fn()
   const mockLogger = {
