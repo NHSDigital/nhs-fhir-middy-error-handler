@@ -34,8 +34,8 @@ function errorHandler({logger = console, level = "error"}: LoggerAndLevel) {
     onError: async (handler) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const error: any = handler.error
-      const requestId = handler.event.requestContext?.requestId ?? null
-      const timeEpoch = handler.event.requestContext?.timeEpoch ?? null
+      const requestId = handler.event.requestContext?.requestId ?? handler.event.headers?.["apigw-request-id"] ?? null
+      const timeEpoch = handler.event.requestContext?.timeEpoch ?? Date.now()
 
       // if there are a `statusCode` and an `error` field
       // this is a valid http error object
