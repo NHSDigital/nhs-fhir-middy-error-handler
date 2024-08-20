@@ -55,81 +55,112 @@ const mockEvent = {
   stageVariables: {}
 }
 
-test("Middleware logs all error details", async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  type ErrorLogger = (error: any, message: string) => void
-  const mockErrorLogger: jest.MockedFunction<ErrorLogger> = jest.fn()
-  const mockLogger = {
-    error: mockErrorLogger
-  }
+const mockStateMachineEvent = {
+  body: {},
+  headers: {
+    "apigw-request-id": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+    "nhsd-correlation-id": "test-request-id.test-correlation-id.rrt-5789322914740101037-b-aet2-20145-482635-2",
+    "nhsd-nhslogin-user": "P9:9912003071",
+    "nhsd-request-id": "test-request-id",
+    "x-correlation-id": "test-correlation-id",
+    "x-request-id": "test-request-id"
+  },
+  querystring: {},
+  path: {}
+}
 
-  const handler = middy(() => {
-    throw new Error("error running lambda")
+describe("Middy Error Handler", () => {
+  beforeAll(() => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date("2015-04-09T12:34:56.001Z"))
   })
 
-  handler.use(errorHandler({logger: mockLogger}))
+  test("Middleware logs all error details", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type ErrorLogger = (error: any, message: string) => void
+    const mockErrorLogger: jest.MockedFunction<ErrorLogger> = jest.fn()
+    const mockLogger = {
+      error: mockErrorLogger
+    }
 
-  await handler({}, {})
+    const handler = middy(() => {
+      throw new Error("error running lambda")
+    })
 
-  expect(mockErrorLogger).toHaveBeenCalledTimes(1)
+    handler.use(errorHandler({logger: mockLogger}))
 
-  const [errorObject, errorMessage] = mockErrorLogger.mock.calls[mockErrorLogger.mock.calls.length - 1]
-  expect(errorMessage).toBe("Error: error running lambda")
-  expect(errorObject.error.name).toBe("Error")
-  expect(errorObject.error.message).toBe("error running lambda")
-  expect(errorObject.error.stack).not.toBeNull()
-})
+    await handler({}, {})
 
-test("Middleware returns details as valid fhir from lambda event", async () => {
-  const mockLogger = {
-    error: jest.fn(() => {})
-  }
+    expect(mockErrorLogger).toHaveBeenCalledTimes(1)
 
-  const handler = middy(() => {
-    throw new Error("error running lambda")
+    const [errorObject, errorMessage] = mockErrorLogger.mock.calls[mockErrorLogger.mock.calls.length - 1]
+    expect(errorMessage).toBe("Error: error running lambda")
+    expect(errorObject.error.name).toBe("Error")
+    expect(errorObject.error.message).toBe("error running lambda")
+    expect(errorObject.error.stack).not.toBeNull()
   })
 
-  handler.use(errorHandler({logger: mockLogger}))
-
-  const response = await handler(mockEvent, {})
-  expect(response.statusCode).toBe(500)
-  expect(JSON.parse(response.body)).toMatchObject({
-    id: "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
-    meta: {
-      lastUpdated: "2015-04-09T12:34:56.001Z"
+  test.each([
+    {
+      event: mockEvent,
+      description: "Middleware returns details as valid fhir from apigw event"
     },
-    resourceType: "OperationOutcome",
-    issue: [
-      {
-        severity: "fatal",
-        code: "exception",
-        details: {
-          coding: [
-            {
-              code: "SERVER_ERROR",
-              display: "500: The Server has encountered an error processing the request.",
-              system: "https://fhir.nhs.uk/CodeSystem/http-error-codes"
-            }
-          ]
+    {
+      event: mockStateMachineEvent,
+      description: "Middleware returns details as valid fhir from step function event"
+    }
+  ])("$description", async ({event}) => {
+    const mockLogger = {
+      error: jest.fn(() => {})
+    }
+
+    const handler = middy(() => {
+      throw new Error("error running lambda")
+    })
+
+    handler.use(errorHandler({logger: mockLogger}))
+
+    const response = await handler(event, {})
+    expect(response.statusCode).toBe(500)
+    expect(JSON.parse(response.body)).toMatchObject({
+      id: "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+      meta: {
+        lastUpdated: "2015-04-09T12:34:56.001Z"
+      },
+      resourceType: "OperationOutcome",
+      issue: [
+        {
+          severity: "fatal",
+          code: "exception",
+          details: {
+            coding: [
+              {
+                code: "SERVER_ERROR",
+                display: "500: The Server has encountered an error processing the request.",
+                system: "https://fhir.nhs.uk/CodeSystem/http-error-codes"
+              }
+            ]
+          }
         }
-      }
-    ]
+      ]
+    })
   })
-})
 
-test("Returns a response with the correct MIME type", async () => {
-  const mockLogger = {
-    error: jest.fn(() => {})
-  }
-  const handler = middy(() => {
-    throw new Error("error running lambda")
+  test("Returns a response with the correct MIME type", async () => {
+    const mockLogger = {
+      error: jest.fn(() => {})
+    }
+    const handler = middy(() => {
+      throw new Error("error running lambda")
+    })
+    handler.use(errorHandler({logger: mockLogger}))
+
+    const response = await handler(mockEvent, {})
+
+    expect(response.headers).toEqual({
+      "Content-Type": "application/fhir+json",
+      "Cache-Control": "no-cache"
+    })
   })
-  handler.use(errorHandler({logger: mockLogger}))
 
-  const response = await handler(mockEvent, {})
-
-  expect(response.headers).toEqual({
-    "Content-Type": "application/fhir+json",
-    "Cache-Control": "no-cache"
-  })
 })
