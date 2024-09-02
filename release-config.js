@@ -1,7 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line no-undef
 const {readFileSync} = require("fs")
 
 const commitTemplate = readFileSync("./releaseNotesTemplates/commit.hbs").toString()
+// eslint-disable-next-line no-undef
 module.exports = {
   branches: [
     {
