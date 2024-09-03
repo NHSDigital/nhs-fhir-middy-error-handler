@@ -2,6 +2,8 @@ name: Release to NPM
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 3"
 
 jobs:
   quality_checks:
