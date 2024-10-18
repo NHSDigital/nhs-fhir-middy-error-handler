@@ -143,8 +143,7 @@ Workflows are in the .github/workflows folder
 - `dependabot_auto_approve_and_merge.yml`: Workflow to auto merge dependabot updates
 - `pr_link.yml`: Workflow to link Pull Requests to Jira tickets and runs when a pull request is opened.
 - `pr_title_check.yml`: Workflow to check the format of a pull request is compliant with the project standards. See [guidelines for contribution](./CONTRIBUTING.md) for details.
-- `pull_request.yml`: Called when pull request is opened or updated. Runs rename_dependabot_prs.yml, quality_checks.yml, and pr_title_check.yml
-- `quality_checks.yml`: Runs quality checks on code. Runs on demand.
+- `pull_request.yml`: Called when pull request is opened or updated. Runs rename_dependabot_prs.yml, [quality_checks](https://github.com/NHSDigital/eps-workflow-quality-checks), and pr_title_check.yml
 - `release.yml`: Uses [semantic-release](https://semantic-release.gitbook.io/semantic-release/) to release main branch to [NPM](https://www.npmjs.com/package/@nhs/fhir-middy-error-handler).
 - `rename_dependabot_prs.yml`: Renames dependabot pull requests to comply with project standards.
 
