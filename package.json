@@ -23,7 +23,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^9.29.0",
     "eslint-plugin-import-newlines": "^1.4.0",
