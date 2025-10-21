@@ -21,7 +21,6 @@
   },
   "type": "module",
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
     "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.0",
@@ -29,15 +28,13 @@
     "eslint-plugin-import-newlines": "^1.4.0",
     "jest": "^30.2.0",
     "license-checker": "^25.0.1",
-    "semantic-release": "^25.0.0",
     "ts-jest": "^29.4.5",
     "ts-node": "^10.4.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.27.0",
-    "@middy/core": "^6.4.5",
-    "conventional-changelog-eslint": "^6.0.0"
+    "@middy/core": "^6.4.5"
   },
   "bugs": {
     "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
