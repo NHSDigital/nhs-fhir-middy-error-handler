@@ -30,11 +30,13 @@ jobs:
           echo "TAG_FORMAT=$TAG_FORMAT" >> "$GITHUB_OUTPUT"
   tag_release:
     needs: [quality_checks, get_asdf_version]
-    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/tag-release.yml@83c45bbbf4325920d6487747e9e4bf2547d1bd6a
+    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/tag-release.yml@c3659bcdb7abf6ecc7ac9d73c14d943d8b142808
     with:
       dry_run: false
       asdfVersion: ${{ needs.get_asdf_version.outputs.asdf_version }}
       branch_name: main
       publish_package: true
       tag_format: ${{ needs.get_asdf_version.outputs.tag_format }}
-    secrets: inherit
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
