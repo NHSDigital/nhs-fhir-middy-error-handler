@@ -9,67 +9,31 @@ jobs:
     uses: NHSDigital/eps-workflow-quality-checks/.github/workflows/quality-checks.yml@v4.1.3
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  tag_release:
-    needs: quality_checks
+  get_asdf_version:
     runs-on: ubuntu-22.04
+    outputs:
+      asdf_version: ${{ steps.asdf-version.outputs.version }}
+      tag_format: ${{ steps.load-config.outputs.TAG_FORMAT }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
-        with:
-          ref: ${{ env.BRANCH_NAME }}
-          fetch-depth: 0
 
-      # using git commit sha for version of action to ensure we have stable version
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@1902764435ca0dd2f3388eea723a4f92a4eb8302
-        with:
-          asdf_branch: v0.11.3
-  
-      - name: Cache asdf
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.asdf
-          key: ${{ runner.os }}-asdf-${{ hashFiles('**/.tool-versions') }}
-          restore-keys: |
-            ${{ runner.os }}-asdf-
-
-      - name: Install asdf dependencies in .tool-versions
-        uses: asdf-vm/actions/install@1902764435ca0dd2f3388eea723a4f92a4eb8302
-        with:
-          asdf_branch: v0.11.3
-        env:
-          PYTHON_CONFIGURE_OPTS: --enable-shared 
-  
-      - name: Install node packages
+      - name: Get asdf version
+        id: asdf-version
+        run: echo "version=$(awk '!/^#/ && NF {print $1; exit}' .tool-versions.asdf)" >> "$GITHUB_OUTPUT"
+      - name: Load config value
+        id: load-config
         run: |
-          make install-node
+          TAG_FORMAT=$(yq '.TAG_FORMAT' .github/config/settings.yml)
+          echo "TAG_FORMAT=$TAG_FORMAT" >> "$GITHUB_OUTPUT"
 
-      - name: Set VERSION_TAG env var to be short git SHA and get next tag varsion
-        id: output_version_tag
-        run: |
-          VERSION_TAG=$(git rev-parse --short HEAD)
-          npx semantic-release --dry-run > semantic-release-output.log
-          NEXT_VERSION=$(grep -i 'The next release version is' semantic-release-output.log | sed -E 's/.* ([[:digit:].]+)$/\1/')
-          if [ -z "${NEXT_VERSION}" ]
-          then
-            echo "Could not get next tag. Here is the log from semantic-release"
-            cat semantic-release-output.log
-            exit 1
-          fi
-          tagFormat=$(node -e "const config=require('./release.config.cjs'); console.log(config.tagFormat)")
-          if [ "${tagFormat}" = "null" ]
-          then
-            tagFormat="v\${version}"
-          fi
-          # disabling shellcheck as replace does not work
-          # shellcheck disable=SC2001
-          NEW_VERSION_TAG=$(echo "$tagFormat" | sed "s/\${version}/$NEXT_VERSION/")
-          echo "## VERSION TAG : ${VERSION_TAG}" >> "$GITHUB_STEP_SUMMARY"
-          echo "## NEXT TAG WILL BE : ${NEW_VERSION_TAG}" >> "$GITHUB_STEP_SUMMARY"
-          echo "VERSION_TAG=${VERSION_TAG}" >> "$GITHUB_OUTPUT"
-          echo "VERSION_TAG=${VERSION_TAG}" >> "$GITHUB_ENV"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  tag_release:
+    needs: [quality_checks, get_asdf_version]
+    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/tag-release.yml@2290b8f50ea4473c6e1b2249891ae1ba274d83c2
+    with:
+      dry_run: true
+      asdfVersion: ${{ needs.get_asdf_version.outputs.asdf_version }}
+      branch_name: main
+      publish_package: false
+      tag_format: ${{ needs.get_asdf_version.outputs.tag_format }}
+    secrets: inherit

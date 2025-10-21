@@ -1,5 +1,11 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
+ARG TARGETARCH
+ENV TARGETARCH=${TARGETARCH}
+
+ARG ASDF_VERSION
+COPY .tool-versions.asdf /tmp/.tool-versions.asdf
+
 # System updates
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -11,14 +17,21 @@ RUN apt-get update \
 RUN apt-get -y install --no-install-recommends \
     libffi-dev libsqlite3-dev
 
+# Install ASDF
+RUN ASDF_VERSION=$(awk '!/^#/ && NF {print $1; exit}' /tmp/.tool-versions.asdf) && \
+    wget -O /tmp/asdf.tar.gz https://github.com/asdf-vm/asdf/releases/download/v${ASDF_VERSION}/asdf-v${ASDF_VERSION}-linux-amd64.tar.gz; \
+    tar -xvzf /tmp/asdf.tar.gz; \
+    mv asdf /usr/bin
+
 USER vscode
 
-# Install ASDF
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3; \
-    echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc; \
-    echo '. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc;
-
-ENV PATH="$PATH:/home/vscode/.asdf/bin/:/workspaces/nhs-fhir-middy-error-handler/node_modules/.bin"
+ENV PATH="$PATH:/home/vscode/.asdf/shims/:/home/vscode/.asdf/bin/:/workspaces/nhs-fhir-middy-error-handler/node_modules/.bin:$PATH"
+RUN \
+    echo 'PATH="/home/vscode/.asdf/shims/:$PATH"' >> ~/.bashrc; \
+    echo '. <(asdf completion bash)' >> ~/.bashrc; \
+    echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc; \
+    echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc; \
+    echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc;
 
 # Install ASDF plugins
 RUN asdf plugin add python; \
@@ -32,8 +45,5 @@ WORKDIR /workspaces/nhs-fhir-middy-error-handler
 ADD .tool-versions /workspaces/nhs-fhir-middy-error-handler/.tool-versions
 ADD .tool-versions /home/vscode/.tool-versions
 
-RUN asdf install; \
-    asdf reshim python; \
-    asdf reshim poetry; \
-    asdf reshim nodejs; \
-    asdf direnv setup --shell bash --version 2.32.2;
+RUN asdf install python; \
+    asdf install
