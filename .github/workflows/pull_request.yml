@@ -11,7 +11,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   pr_title_format_check:
-    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/pr_title_check.yml@7abf2a3233d1b08d6566570dbde34b85daa47859
+    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/pr_title_check.yml@83c45bbbf4325920d6487747e9e4bf2547d1bd6a
 
   get_asdf_version:
     runs-on: ubuntu-22.04
@@ -33,7 +33,7 @@ jobs:
 
   tag_release:
     needs: [get_asdf_version]
-    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/tag-release.yml@2290b8f50ea4473c6e1b2249891ae1ba274d83c2
+    uses: NHSDigital/eps-workflow-semantic-release/.github/workflows/tag-release.yml@83c45bbbf4325920d6487747e9e4bf2547d1bd6a
     with:
       dry_run: true
       asdfVersion: ${{ needs.get_asdf_version.outputs.asdf_version }}
