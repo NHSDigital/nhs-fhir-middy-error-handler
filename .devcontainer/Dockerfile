@@ -15,7 +15,7 @@ RUN apt-get update \
 
 # Python dependencies
 RUN apt-get -y install --no-install-recommends \
-    libffi-dev libsqlite3-dev
+    libffi-dev libsqlite3-dev libbz2-dev tk-dev liblzma-dev libncurses5-dev libncursesw5-dev libreadline-dev
 
 # Download correct AWS CLI for arch
 RUN if [ "$TARGETARCH" = "arm64" ] || [ "$TARGETARCH" == "aarch64" ]; then \

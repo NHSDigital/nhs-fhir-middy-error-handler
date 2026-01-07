@@ -1,31 +1,24 @@
 [project]
-python = "^3.8"
+python = "^3.14"
+name = "nhs-fhir-middy-error-handler"
 
 [tool.poetry]
 name = "nhs-fhir-middy-error-handler"
 description = "A middy error handler for FHIR Lambdas"
 version = "0.0.1-alpha"
 authors = [
-  "Anthony Brown <anthony.brown8@nhs.net>",
-  "Matthew Popat <matthew.popat1@nhs.net>",
-  "Phil Gee <phil.gee@nhs.net>",
-  "Kris Szlapa <kris.szlapa1@nhs.net>",
-  "Jack Spagnoli <jack.spagnoli1@nhs.net>",
-  "Tom Smith <tom.smith24@nhs.net>",
-  "Adam Brown <adam.brown41@nhs.net>",
-  "Sean Steberis <sean.steberis2@nhs.net>",
-  "Jonathan Welch <jonathan.welch1@nhs.net>",
-  "Natasa Fragkou <natasa.fragkou@nhs.net>",
+    "EPS"
 ]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/NHSDigital/nhs-fhir-middy-error-handler"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.14"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pip-licenses = "^4.5.1"
-pre-commit = "^3.5.0"
+pre-commit = "^4.5.1"
 
 [tool.poetry.scripts]
