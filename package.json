@@ -5,8 +5,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint  --max-warnings 0 --fix --config ./eslint.config.mjs .",
-    "test": "POWERTOOLS_DEV=true NODE_OPTIONS=--experimental-vm-modules jest --no-cache --coverage",
-    "check-licenses": "license-checker --failOn GPL --failOn LGPL"
+    "test": "POWERTOOLS_DEV=true NODE_OPTIONS=--experimental-vm-modules jest --no-cache --coverage"
   },
   "repository": {
     "type": "git",
@@ -27,7 +26,6 @@
     "eslint": "^9.39.2",
     "eslint-plugin-import-newlines": "^1.4.0",
     "jest": "^30.2.0",
-    "license-checker": "^25.0.1",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.4.0",
     "typescript": "^5.9.3"
