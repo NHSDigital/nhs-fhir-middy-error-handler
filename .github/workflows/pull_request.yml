@@ -37,7 +37,7 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   pr_title_format_check:
-    uses: NHSDigital/eps-common-workflows/.github/workflows/pr_title_check.yml@9791a77de7b005056b4ddfb9789306f5179f53da
+    uses: NHSDigital/eps-common-workflows/.github/workflows/pr_title_check.yml@e5c6c80d4acb09603dab4a0c8c69889d6e117f8e
 
   tag_release:
     needs: [get_asdf_version]
