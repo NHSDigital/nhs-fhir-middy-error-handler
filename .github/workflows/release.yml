@@ -33,7 +33,7 @@ jobs:
 
   tag_release:
     needs: [quality_checks, get_asdf_version]
-    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release.yml@b796becae6fece7d8d093e0aa976a05d3a5e5dbe
+    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release.yml@a2edde3fb0e9816a25a5ba4923b4d509db83f552
     permissions:
       contents: write # to be able to publish a GitHub release
       id-token: write # to enable use of OIDC for trusted publishing and npm provenance
