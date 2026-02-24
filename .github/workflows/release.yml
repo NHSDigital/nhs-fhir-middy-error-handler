@@ -37,7 +37,7 @@ jobs:
 
   tag_release:
     needs: [quality_checks, get_config_values]
-    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release-devcontainer.yml@36677e1d6bfaa010d7b78942a1ade12fbefecb80
+    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release-devcontainer.yml@2a083514efbae0b9ddacfcc87b9d285767b686b8
     permissions:
       contents: write # to be able to publish a GitHub release
       id-token: write # to enable use of OIDC for trusted publishing and npm provenance
