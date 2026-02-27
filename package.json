@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.31.0",
-    "@middy/core": "^7.1.0",
+    "@middy/core": "^7.1.2",
     "uninstall": "^0.0.0"
   },
   "bugs": {
