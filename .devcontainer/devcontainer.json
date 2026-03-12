@@ -1,5 +1,5 @@
 {
-  "name": "Ubuntu",
+  "name": "eps-fhir-middy-error-handler",
   "build": {
     "dockerfile": "Dockerfile",
     "context": "..",

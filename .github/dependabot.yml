@@ -17,20 +17,6 @@ updates:
       prefix: "Upgrade: [dependabot] - "
 
   ###################################
-  # NPM     #########################
-  ###################################
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "friday"
-      time: "18:00" # UTC
-    open-pull-requests-limit: 20
-    commit-message:
-      prefix: "Upgrade: [dependabot] - "
-    versioning-strategy: increase
-
-  ###################################
   # Poetry  #########################
   ###################################
   - package-ecosystem: "pip"
@@ -38,7 +24,21 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
-      time: "18:00" # UTC
+      time: "20:00" # UTC
+    open-pull-requests-limit: 20
+    commit-message:
+      prefix: "Upgrade: [dependabot] - "
+    versioning-strategy: increase
+
+  ###################################
+  # NPM     #########################
+  ###################################
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "22:00" # UTC
     open-pull-requests-limit: 20
     commit-message:
       prefix: "Upgrade: [dependabot] - "
