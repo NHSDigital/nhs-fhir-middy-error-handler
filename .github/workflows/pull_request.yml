@@ -29,7 +29,7 @@ jobs:
 
   tag_release:
     needs: [get_config_values]
-    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release-devcontainer.yml@dac60c1e29babc62013e7bb9ade002cb381c4c49
+    uses: NHSDigital/eps-common-workflows/.github/workflows/tag-release-devcontainer.yml@383f3f9eaf3cb553ebcd74897bfed4d5e387629e
     with:
       dry_run: true
       pinned_image: ${{ needs.get_config_values.outputs.pinned_image }}
