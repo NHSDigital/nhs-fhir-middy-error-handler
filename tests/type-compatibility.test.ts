@@ -34,13 +34,18 @@ describe("Type compatibility", () => {
     } catch (error) {
       const stderr = String((error as {stderr?: Buffer}).stderr ?? "")
       const stdout = String((error as {stdout?: Buffer}).stdout ?? "")
-      throw new Error(
-        [
-          "Strict TypeScript compatibility check failed for tests/fixtures/middy-powertools-compat.ts",
-          stdout.trim(),
-          stderr.trim()
-        ].filter(Boolean).join("\n\n")
+      const wrappedError = Object.assign(
+        new Error(
+          [
+            "Strict TypeScript compatibility check failed for tests/fixtures/middy-powertools-compat.ts",
+            stdout.trim(),
+            stderr.trim()
+          ].filter(Boolean).join("\n\n")
+        ),
+        {cause: error}
       )
+
+      throw wrappedError
     }
   })
 })
