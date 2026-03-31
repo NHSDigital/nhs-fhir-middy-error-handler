@@ -29,7 +29,8 @@
         "Orta.vscode-jest",
         "dbaeumer.vscode-eslint",
         "ms-azuretools.vscode-docker",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml,",
+        "sonarsource.sonarlint-vscode"
       ],
       "settings": {
         "python.defaultInterpreterPath": "/workspaces/nhs-fhir-middy-error-handler/.venv/bin/python",
