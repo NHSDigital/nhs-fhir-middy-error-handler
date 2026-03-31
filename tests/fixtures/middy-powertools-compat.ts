@@ -4,8 +4,4 @@ import {injectLambdaContext} from "@aws-lambda-powertools/logger/middleware"
 
 const logger = new Logger({serviceName: "type-compat-repro"})
 
-const middlewareList: Array<middy.MiddlewareObj> = [
-  injectLambdaContext(logger, {clearState: true})
-]
-
-void middlewareList
+export const middleware: middy.MiddlewareObj = injectLambdaContext(logger, {clearState: true})
