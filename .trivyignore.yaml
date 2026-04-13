@@ -1,7 +1,0 @@
-vulnerabilities:
-  - id: CVE-2026-26996
-    statement: downstream dependency for minimatch - waiting for new jest release
-    expired_at: 2026-06-01
-  - id: CVE-2026-32141
-    statement: downstream dependency for flatted
-    expired_at: 2026-06-01
