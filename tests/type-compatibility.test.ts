@@ -13,6 +13,7 @@ describe("Type compatibility", () => {
     const compileFixture = () => {
       execFileSync(process.execPath, [
         tscPath,
+        "--ignoreConfig",
         "--noEmit",
         "--strict",
         "--skipLibCheck",
