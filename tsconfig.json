@@ -8,7 +8,10 @@
     "declaration": true,
     "sourceMap": true,
     "composite": true,
-    "moduleResolution": "node",
+    "types": [
+      "node"
+    ],
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
