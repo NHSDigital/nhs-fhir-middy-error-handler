@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "2.33.0",
-    "@middy/core": "7.1.2"
+    "@middy/core": "7.2.3"
   },
   "bugs": {
     "url": "https://github.com/NHSDigital/nhs-fhir-middy-error-handler/issues"
